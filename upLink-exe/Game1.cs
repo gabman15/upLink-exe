@@ -68,9 +68,9 @@ namespace upLink_exe
 
             _components = new List<Component>()
       {
-        new GameObject(Content.Load<Texture2D>("Background")),
         _player,
-        new GameObject(Content.Load<Texture2D>("NPC")),
+        new GameObject(Content.Load<Texture2D>("Background")),
+        
       };
         }
 
@@ -132,7 +132,7 @@ namespace upLink_exe
                 shakeY = (float)Math.Sin(angle) * radius;
             }
 
-            spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(viewX + shakeX, viewY + shakeY, 0));
+            spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
 
             foreach (var component in _components)
                 component.Draw(gameTime, spriteBatch);
