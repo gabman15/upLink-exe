@@ -18,6 +18,7 @@ namespace upLink_exe
         private int shake_amount;
 
         private List<Component> _components;
+        private GameObject background;
 
         private Player _player;
 
@@ -64,13 +65,17 @@ namespace upLink_exe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            background = new GameObject(Content.Load<Texture2D>("Background"));
+
             _player = new Player(Content.Load<Texture2D>("Player"));
 
             _components = new List<Component>()
       {
-        _player,
-        new GameObject(Content.Load<Texture2D>("Background")),
-        
+         _player,
+         
+         
+         new GameObject(Content.Load<Texture2D>("NPC")),
+
       };
         }
 
@@ -134,8 +139,12 @@ namespace upLink_exe
 
             spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
 
-            foreach (var component in _components)
+            background.Draw(gameTime, spriteBatch);
+
+            foreach (var component in _components) {
+                Console.WriteLine("PRINT TEST " + component);
                 component.Draw(gameTime, spriteBatch);
+            }
 
             spriteBatch.End();
 
