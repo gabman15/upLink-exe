@@ -19,7 +19,7 @@ namespace upLink_exe
         public int Height { get; set; }
         public Game1 Game { get; set; }
         //public SoundManager Sounds { get; set; }
-
+        private int roomToGoTo;
 
 
         /// <summary>
@@ -55,22 +55,12 @@ namespace upLink_exe
         }
         public void ChangeRoom(int room)
         {
-            if (transitionDirection != 0) return;
             roomToGoTo = room;
-            transitionProgress = 0;
-            transitionDirection = 1;
         }
-        public void NextRoom()
-        {
-            if (transitionDirection != 0) return;
-            roomToGoTo = -1;
-            transitionProgress = 0;
-            transitionDirection = 1;
-        }
+
         public void Draw(SpriteBatch batch)
         {
-            Game.GraphicsDevice.Clear(Lighting.DarknessColor);
-            Vector2 ceiledOffset = GameObject.VectorCeil(ViewOffset);
+            Game.GraphicsDevice.Clear(ConsoleColor.Black);
             Background.Draw(batch, ceiledOffset);
             for (int i = 0; i < GameObjectList.Count; i++)
             {
