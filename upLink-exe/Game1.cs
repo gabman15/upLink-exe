@@ -65,9 +65,9 @@ namespace upLink_exe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            background = new GameObject(Content.Load<Texture2D>("Background"));
+            background = new GameObject(Content.Load<Texture2D>("beach"));
 
-            _player = new Player(Content.Load<Texture2D>("Player"));
+            _player = new Player(Content.Load<Texture2D>("turtlebox"));
 
             _components = new List<Component>()
       {
