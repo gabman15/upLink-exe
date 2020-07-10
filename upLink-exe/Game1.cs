@@ -2,17 +2,29 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using upLink_exe.GameObjects;
 
 namespace upLink_exe
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+
+        private Random rand;
+        private int shake_timer;
+        private int shake_amount;
+
+        private List<Component> _components;
+
+        private Player _player;
+
+        public static int ScreenHeight;
+
+        public static int ScreenWidth;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,8 +39,19 @@ namespace upLink_exe
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            Console.WriteLine("I like turtles");
+            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 50;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 50;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
+
+            this.IsMouseVisible = true;
+
+            rand = rand = new Random();
+
+            ScreenHeight = graphics.PreferredBackBufferHeight - 50;
+
+            ScreenWidth = graphics.PreferredBackBufferWidth - 50;
+
             base.Initialize();
         }
 
@@ -41,7 +64,14 @@ namespace upLink_exe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            _player = new Player(Content.Load<Texture2D>("Player"));
+
+            _components = new List<Component>()
+      {
+        new GameObject(Content.Load<Texture2D>("Background")),
+        _player,
+        new GameObject(Content.Load<Texture2D>("NPC")),
+      };
         }
 
         /// <summary>
@@ -60,10 +90,23 @@ namespace upLink_exe
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
-            // TODO: Add your update logic here
+            var kstate = Keyboard.GetState();
+
+            //THIS IS A TEST FOR SCREEN SHAKE
+            if (kstate.IsKeyDown(Keys.F))
+            {
+                shake_timer = 5;
+                shake_amount = 30;
+            }
+
+            foreach (var component in _components)
+                component.Update(gameTime);
+
+            if (shake_timer > 0)
+            {
+                shake_timer--;
+            }
 
             base.Update(gameTime);
         }
@@ -76,7 +119,25 @@ namespace upLink_exe
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+
+            //SCREEN SHAKE 
+            float shakeX = 0;
+            float shakeY = 0;
+
+            if (shake_timer > 0)
+            {
+                float radius = rand.Next(1, shake_amount);
+                int angle = rand.Next(0, 360);
+                shakeX = (float)Math.Cos(angle) * radius;
+                shakeY = (float)Math.Sin(angle) * radius;
+            }
+
+            spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(viewX + shakeX, viewY + shakeY, 0));
+
+            foreach (var component in _components)
+                component.Draw(gameTime, spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
