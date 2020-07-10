@@ -70,11 +70,10 @@ namespace upLink_exe
             _player = new Player(Content.Load<Texture2D>("turtlebox"));
 
             _components = new List<Component>()
-      {
-         _player,
-         new GameObject(Content.Load<Texture2D>("NPC")),
-
-      };
+            {background,
+             _player,
+             new GameObject(Content.Load<Texture2D>("NPC")),
+            };
         }
 
         /// <summary>
@@ -137,10 +136,7 @@ namespace upLink_exe
 
             spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
 
-            background.Draw(gameTime, spriteBatch);
-
             foreach (var component in _components) {
-                //Console.WriteLine("PRINT TEST " + component);
                 component.Draw(gameTime, spriteBatch);
             }
 
