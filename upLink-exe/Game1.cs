@@ -40,8 +40,8 @@ namespace upLink_exe
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 50;
-            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 50;
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
@@ -49,9 +49,9 @@ namespace upLink_exe
 
             rand = rand = new Random();
 
-            ScreenHeight = graphics.PreferredBackBufferHeight - 50;
+            ScreenHeight = graphics.PreferredBackBufferHeight;
 
-            ScreenWidth = graphics.PreferredBackBufferWidth - 50;
+            ScreenWidth = graphics.PreferredBackBufferWidth;
 
             base.Initialize();
         }
@@ -142,7 +142,7 @@ namespace upLink_exe
             background.Draw(gameTime, spriteBatch);
 
             foreach (var component in _components) {
-                Console.WriteLine("PRINT TEST " + component);
+                //Console.WriteLine("PRINT TEST " + component);
                 component.Draw(gameTime, spriteBatch);
             }
 
