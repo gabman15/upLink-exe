@@ -72,8 +72,6 @@ namespace upLink_exe
             _components = new List<Component>()
       {
          _player,
-         
-         
          new GameObject(Content.Load<Texture2D>("NPC")),
 
       };
