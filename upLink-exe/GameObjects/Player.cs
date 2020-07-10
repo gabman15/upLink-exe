@@ -38,15 +38,15 @@ namespace upLink_exe.GameObjects
             float x = Position.X;
             float y = Position.Y;
 
-            if (x > Game1.ScreenWidth - _texture.Width / 2)
-                x = Game1.ScreenWidth - _texture.Width / 2;
-            else if (x < _texture.Width / 2)
-                x = _texture.Width / 2;
+            if (x > Game1.ScreenWidth - _texture.Width)
+                x = Game1.ScreenWidth - _texture.Width;
+            else if (x < 0)
+                x = 0;
 
-            if (y > Game1.ScreenHeight - _texture.Height / 2)
-                y = Game1.ScreenHeight - _texture.Height / 2;
-            else if (y < _texture.Height / 2)
-                y = _texture.Height / 2;
+            if (y > Game1.ScreenHeight - _texture.Height)
+                y = Game1.ScreenHeight - _texture.Height;
+            else if (y < 0)
+                y = 0;
 
             Position = new Vector2(x, y);
         }
