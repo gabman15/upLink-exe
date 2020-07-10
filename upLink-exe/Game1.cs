@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace upLink_exe
 {
@@ -27,7 +28,7 @@ namespace upLink_exe
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Console.WriteLine("I like turtles");
             base.Initialize();
         }
 
