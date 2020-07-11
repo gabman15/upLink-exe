@@ -21,9 +21,9 @@ namespace upLink_exe.GameObjects
         {
             spawnLoc = pos;
 
-            AssetManager.RequestTexture("turtle", (frames) =>
+            AssetManager.RequestTexture("yara", (frames) =>
             {
-                Console.WriteLine(frames.Length);
+                //Console.WriteLine(frames.Length);
                 idleSprite = frames;
                 Sprite = new SpriteData(idleSprite);
                 Sprite.Size = new Vector2(100, 100);
@@ -55,7 +55,7 @@ namespace upLink_exe.GameObjects
                 velocity.X = MoveSpeed;
 
             Position += velocity;
-
+            base.Update();
         }
     }
 }

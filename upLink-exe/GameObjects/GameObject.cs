@@ -51,6 +51,7 @@ namespace upLink_exe.GameObjects
 
         public virtual void Update()
         {
+            //Console.WriteLine("Object updating!");
             if (Velocity.X != 0 || Velocity.Y != 0)
             {
                 Vector2 vel = Velocity;
@@ -122,7 +123,7 @@ namespace upLink_exe.GameObjects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //Console.WriteLine(Sprite?.Frames?[0]);
+            //Console.WriteLine(Sprite?.CurrentFrame);
             //Console.WriteLine("sprite size: " + Sprite.Size);
             Sprite?.Draw(spriteBatch, Position - Sprite.Offset);
         }

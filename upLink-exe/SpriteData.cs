@@ -43,11 +43,17 @@ namespace upLink_exe
         public SpriteData(Texture2D[] frames) : base()
         {
             Frames = frames;
+            CurrentFrame = 0;
+            Speed = 1;
+            Layer = 0;
+            Offset = new Vector2(0, 0);
+            SpriteEffect = SpriteEffects.None;
+            Source = null;
         }
         public void Update()
         {
             if (Frames == null) return;
-            currentFrame += Speed;
+            currentFrame += 1;
             if (currentFrame < 0) currentFrame += Frames.Length;
             if (currentFrame >= Frames.Length) currentFrame -= Frames.Length;
         }
