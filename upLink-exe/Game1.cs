@@ -40,8 +40,8 @@ namespace upLink_exe
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1200;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1216;
+            graphics.PreferredBackBufferHeight = 832;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
