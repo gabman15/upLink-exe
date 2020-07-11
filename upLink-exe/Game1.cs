@@ -136,8 +136,9 @@ namespace upLink_exe
                 int angle = rand.Next(0, 360);
                 shakeX = (float)Math.Cos(angle) * radius;
                 shakeY = (float)Math.Sin(angle) * radius;
+                shake_timer--;
             }
-
+            
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
 
             currentRoom.Draw(spriteBatch);
