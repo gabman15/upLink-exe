@@ -20,6 +20,7 @@ namespace upLink_exe
         public Game1 Game { get; set; }
         //public SoundManager Sounds { get; set; }
         private int roomToGoTo;
+        private Texture2D background;
 
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace upLink_exe
                     }
                 case "background":
                     {
-                        Background.LoadBackground(parts[1]);
+                        background = parts[1];
                         break;
                     }
                 case "note":
