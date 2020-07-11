@@ -44,9 +44,9 @@
   <ItemGroup>
     <Compile Include="Component.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
-    <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameObjects\Saw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
