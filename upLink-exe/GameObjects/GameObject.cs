@@ -13,11 +13,8 @@ namespace upLink_exe.GameObjects
         protected Texture2D _texture;
 
         public Vector2 Position { get; set; }
-
-        public Rectangle Rectangle
-        {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height); }
-        }
+        public Vector2 Size { get; set; }
+        public SpriteData Sprite { get; set; }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
