@@ -20,19 +20,21 @@ namespace upLink_exe.GameObjects
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
             spawnLoc = pos;
-            Sprite = new SpriteData();
-            Sprite.Size = new Vector2(100, 100);
-            Sprite.Layer = Layer;
-            Hitbox = new Rectangle(0, 0, 100, 100);
-            idleSprite = null;
+
             AssetManager.RequestTexture("turtle", (frames) =>
             {
+                Console.WriteLine(frames.Length);
                 idleSprite = frames;
+                Sprite = new SpriteData(idleSprite);
+                Sprite.Size = new Vector2(100, 100);
+                Sprite.Layer = Layer;
+                Sprite.Offset = new Vector2(0, 0);
             });
 
-            Sprite.Change(idleSprite);
-            Sprite.Size = new Vector2(100, 100);
-            Sprite.Offset = new Vector2(0, 0);
+            
+            Hitbox = new Rectangle(0, 0, 100, 100);
+            
+            
         }
 
         public override void Update()

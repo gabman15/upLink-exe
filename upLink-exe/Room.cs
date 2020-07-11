@@ -32,7 +32,7 @@ namespace upLink_exe
         public Room(Game1 game)
         {
             Game = game;
-            background = new GameObject(this, new Vector2(0,0), new Vector2(0,0), new Vector2(1216, 832));
+            background = new GameObject(this, new Vector2(0,0), new Vector2(0,0), new Vector2(800, 800));
             //Sounds = new SoundManager();
 
             GameObjectList = new List<GameObject>();
@@ -61,11 +61,11 @@ namespace upLink_exe
 
         public void Draw(SpriteBatch batch)
         {
-            Game.GraphicsDevice.Clear(Color.Black);
+            Game.GraphicsDevice.Clear(Color.White);
+            //Console.WriteLine(background.Sprite.Frames[0]);
             background.Draw(batch);
             for (int i = 0; i < GameObjectList.Count; i++)
             {
-
                 GameObject obj = GameObjectList[i];
                 obj.Draw(batch);
             }
@@ -112,6 +112,7 @@ namespace upLink_exe
                             Console.WriteLine(spriteName);
                             background.Sprite = new SpriteData();
                             SpriteData bSprite = background.Sprite;
+                            bSprite.Size = background.Size;
                             bSprite.Change(frame);
                         });
                         break;

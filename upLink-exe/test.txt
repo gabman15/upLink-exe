@@ -1,5 +1,6 @@
-width 1200
+width 800
 height 800
 background beach
 
 createobject player 32 32 5
+createobject player 64 64 5

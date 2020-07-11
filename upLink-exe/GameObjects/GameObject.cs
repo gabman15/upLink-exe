@@ -122,6 +122,8 @@ namespace upLink_exe.GameObjects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            //Console.WriteLine(Sprite?.Frames?[0]);
+            //Console.WriteLine("sprite size: " + Sprite.Size);
             Sprite?.Draw(spriteBatch, Position - Sprite.Offset);
         }
         public static Vector2 VectorCeil(Vector2 val)
