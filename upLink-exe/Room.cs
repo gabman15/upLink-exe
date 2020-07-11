@@ -20,7 +20,7 @@ namespace upLink_exe
         public Game1 Game { get; set; }
         //public SoundManager Sounds { get; set; }
         private int roomToGoTo;
-        private Texture2D background;
+        private GameObject background = new GameObject(Content.Load<Texture2D>("beach"));
 
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace upLink_exe
         public void Draw(SpriteBatch batch)
         {
             Game.GraphicsDevice.Clear(ConsoleColor.Black);
-            Background.Draw(batch, ceiledOffset);
+            background.Draw();
             for (int i = 0; i < GameObjectList.Count; i++)
             {
                 GameObject obj = GameObjectList[i];
@@ -73,9 +73,6 @@ namespace upLink_exe
                 GameTile tile = GameTileList[i];
                 tile.Draw(batch, ceiledOffset);
             }
-            Lighting.Draw(batch, ceiledOffset);
-            Lighting.LightingDifficulty = transitionProgress + 1;
-            batch.Draw(whiteChunk, new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), null, Color.Black * ((float)transitionProgress / maxTransitionProgress), 0f, Vector2.Zero, SpriteEffects.None, 1f);
         }
         public void DisplayHitbox()
         {
