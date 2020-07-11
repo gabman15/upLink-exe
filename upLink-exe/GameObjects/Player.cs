@@ -14,7 +14,8 @@ namespace upLink_exe.GameObjects
 
         private Vector2 spawnLoc;
         private Texture2D[] idleSprite;
-        private KeyboardState keyState;
+        private KeyboardState keyState, oldKeyState = Keyboard.GetState();
+        private int movementStage = 0;
         public static float MoveSpeed = 3f;
 
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
@@ -33,8 +34,6 @@ namespace upLink_exe.GameObjects
 
             
             Hitbox = new Rectangle(0, 0, 100, 100);
-            
-            
         }
 
         public override void Update()
@@ -42,19 +41,43 @@ namespace upLink_exe.GameObjects
             Vector2 velocity = Velocity;
 
             keyState = Keyboard.GetState();
-            
 
-            if (keyState.IsKeyDown(Keys.W))
-                velocity.Y = -MoveSpeed;
-            else if (keyState.IsKeyDown(Keys.S))
-                velocity.Y = MoveSpeed;
+            if (movementStage > 0)
+                movementStage -= 1;
 
-            if (keyState.IsKeyDown(Keys.A))
-                velocity.X = -MoveSpeed;
-            else if (keyState.IsKeyDown(Keys.D))
-                velocity.X = MoveSpeed;
+            // Free for commands
+            if (movementStage == 0)
+            {
+                // Stop movement
+                velocity = new Vector2();
 
-            Position += velocity;
+                // Take in new commands
+                if (!keyState.IsKeyDown(Keys.W) && oldKeyState.IsKeyDown(Keys.W))
+                {
+                    velocity.Y = -MoveSpeed;
+                    movementStage = 10;
+                }
+                else if (!keyState.IsKeyDown(Keys.S) && oldKeyState.IsKeyDown(Keys.S))
+                {
+                    velocity.Y = MoveSpeed;
+                    movementStage = 10;
+                }
+                else if (!keyState.IsKeyDown(Keys.A) && oldKeyState.IsKeyDown(Keys.A))
+                {
+                    velocity.X = -MoveSpeed;
+                    movementStage = 10;
+                }
+                else if (!keyState.IsKeyDown(Keys.D) && oldKeyState.IsKeyDown(Keys.D))
+                {
+                    velocity.X = MoveSpeed;
+                    movementStage = 10;
+                }
+            }
+
+            Position += velocity*10;
+
+            Velocity = velocity;
+            oldKeyState = keyState;
 
         }
     }
