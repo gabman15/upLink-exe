@@ -17,14 +17,10 @@ namespace upLink_exe
         private int shake_timer;
         private int shake_amount;
 
-        private List<Component> _components;
-        private GameObject background;
-
-        private Player _player;
-
-        public static int ScreenHeight;
-
-        public static int ScreenWidth;
+        Room currentRoom;
+        private int currentLevel;
+        public int lives;
+        
 
         public Game1()
         {
@@ -40,8 +36,8 @@ namespace upLink_exe
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1216;
-            graphics.PreferredBackBufferHeight = 832;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
@@ -49,10 +45,8 @@ namespace upLink_exe
 
             rand = rand = new Random();
 
-            ScreenHeight = graphics.PreferredBackBufferHeight;
-
-            ScreenWidth = graphics.PreferredBackBufferWidth;
-
+            LoadLevel(1);
+            currentLevel = 1;
             base.Initialize();
         }
 
@@ -65,15 +59,13 @@ namespace upLink_exe
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            background = new GameObject(Content.Load<Texture2D>("beach"));
+            AssetManager.Content = Content;
 
-            _player = new Player(Content.Load<Texture2D>("turtlebox"));
-
-            _components = new List<Component>()
-            {background,
-             _player,
-             new GameObject(Content.Load<Texture2D>("NPC")),
-            };
+            AssetManager.LoadTexture("ball", "sprites\\ball", 1);
+            AssetManager.LoadTexture("beach", "sprites\\beach", 1);
+            AssetManager.LoadTexture("monaco", "sprites\\monaco", 1);
+            AssetManager.LoadTexture("turtleFlare", "sprites\\turtleFlare", 1);
+            AssetManager.LoadTexture("turtle", "sprites\\turtle", 1);
         }
 
         /// <summary>
@@ -83,6 +75,22 @@ namespace upLink_exe
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+        }
+
+
+        public void LoadLevel(int levelnum)
+        {
+            currentLevel = levelnum;
+            currentRoom?.Destroy();
+            currentRoom = new Room(this);
+            
+            currentRoom.Load("test.txt");
+            //currentRoom.Load("level" + levelnum + ".txt");
+        }
+
+        public void NextLevel()
+        {
+            LoadLevel(currentLevel + 1);
         }
 
         /// <summary>
@@ -102,13 +110,9 @@ namespace upLink_exe
                 shake_amount = 30;
             }
 
-            foreach (var component in _components)
-                component.Update(gameTime);
-
-            if (shake_timer > 0)
-            {
-                shake_timer--;
-            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kstate.IsKeyDown(Keys.Escape))
+                Exit();
+            currentRoom.Update();
 
             base.Update(gameTime);
         }
@@ -134,11 +138,9 @@ namespace upLink_exe
                 shakeY = (float)Math.Sin(angle) * radius;
             }
 
-            spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, Matrix.CreateTranslation(shakeX, shakeY, 0));
 
-            foreach (var component in _components) {
-                component.Draw(gameTime, spriteBatch);
-            }
+            currentRoom.Draw(spriteBatch);
 
             spriteBatch.End();
 

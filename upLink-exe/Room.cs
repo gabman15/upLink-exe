@@ -14,13 +14,13 @@ namespace upLink_exe
     public class Room
     {
         public List<GameObject> GameObjectList { get; set; }
-        //public List<GameTile> GameTileList { get; set; }
+        public List<GameTile> GameTileList { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public Game1 Game { get; set; }
         //public SoundManager Sounds { get; set; }
         private int roomToGoTo;
-        private GameObject background = new GameObject(Content.Load<Texture2D>("beach"));
+        private GameObject background;
 
 
         /// <summary>
@@ -32,11 +32,11 @@ namespace upLink_exe
         public Room(Game1 game)
         {
             Game = game;
-
+            background = new GameObject(this, new Vector2(0,0), new Vector2(0,0), new Vector2(1216, 832));
             //Sounds = new SoundManager();
 
             GameObjectList = new List<GameObject>();
-            //GameTileList = new List<GameTile>();
+            GameTileList = new List<GameTile>();
 
             Width = 512;
             Height = 512;
@@ -61,25 +61,18 @@ namespace upLink_exe
 
         public void Draw(SpriteBatch batch)
         {
-            Game.GraphicsDevice.Clear(ConsoleColor.Black);
-            background.Draw();
+            Game.GraphicsDevice.Clear(Color.Black);
+            background.Draw(batch);
             for (int i = 0; i < GameObjectList.Count; i++)
             {
+
                 GameObject obj = GameObjectList[i];
-                obj.Draw(batch, ceiledOffset);
+                obj.Draw(batch);
             }
             for (int i = 0; i < GameTileList.Count; i++)
             {
                 GameTile tile = GameTileList[i];
-                tile.Draw(batch, ceiledOffset);
-            }
-        }
-        public void DisplayHitbox()
-        {
-            for (int i = 0; i < GameObjectList.Count; i++)
-            {
-                GameObject obj = GameObjectList[i];
-                obj.drawHitbox = true;
+                tile.Draw(batch);
             }
         }
         public void ProcessCommand(string cmd)
@@ -113,16 +106,14 @@ namespace upLink_exe
                     }
                 case "background":
                     {
-                        background = parts[1];
-                        break;
-                    }
-                case "note":
-                    {
-                        for (int i = 1; i < parts.Length; i++)
+                        string spriteName = parts[1];
+                        AssetManager.RequestTexture(spriteName, (frame) =>
                         {
-                            NoteText += parts[i] + " ";
-                        }
-                        NoteText += "\n";
+                            Console.WriteLine(spriteName);
+                            background.Sprite = new SpriteData();
+                            SpriteData bSprite = background.Sprite;
+                            bSprite.Change(frame);
+                        });
                         break;
                     }
             }

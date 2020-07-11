@@ -11,44 +11,49 @@ namespace upLink_exe.GameObjects
 {
     public class Player : GameObject
     {
-        public Player(Texture2D texture)
-          : base(texture)
-        {
 
+        private Vector2 spawnLoc;
+        private Texture2D[] idleSprite;
+        private KeyboardState keyState;
+        public static float MoveSpeed = 3f;
+
+        public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
+        {
+            spawnLoc = pos;
+            Sprite = new SpriteData();
+            Sprite.Size = new Vector2(100, 100);
+            Sprite.Layer = Layer;
+            Hitbox = new Rectangle(0, 0, 100, 100);
+            idleSprite = null;
+            AssetManager.RequestTexture("turtle", (frames) =>
+            {
+                idleSprite = frames;
+            });
+
+            Sprite.Change(idleSprite);
+            Sprite.Size = new Vector2(100, 100);
+            Sprite.Offset = new Vector2(0, 0);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
-            var velocity = new Vector2();
+            Vector2 velocity = Velocity;
 
-            var speed = 3f;
+            keyState = Keyboard.GetState();
+            
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-                velocity.Y = -speed;
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                velocity.Y = speed;
+            if (keyState.IsKeyDown(Keys.W))
+                velocity.Y = -MoveSpeed;
+            else if (keyState.IsKeyDown(Keys.S))
+                velocity.Y = MoveSpeed;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                velocity.X = -speed;
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                velocity.X = speed;
+            if (keyState.IsKeyDown(Keys.A))
+                velocity.X = -MoveSpeed;
+            else if (keyState.IsKeyDown(Keys.D))
+                velocity.X = MoveSpeed;
 
             Position += velocity;
 
-            float x = Position.X;
-            float y = Position.Y;
-
-            if (x > Game1.ScreenWidth - _texture.Width)
-                x = Game1.ScreenWidth - _texture.Width;
-            else if (x < 0)
-                x = 0;
-
-            if (y > Game1.ScreenHeight - _texture.Height)
-                y = Game1.ScreenHeight - _texture.Height;
-            else if (y < 0)
-                y = 0;
-
-            Position = new Vector2(x, y);
         }
     }
 }
