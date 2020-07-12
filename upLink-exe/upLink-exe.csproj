@@ -45,6 +45,10 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="GameObjects\BlockObject.cs" />
+    <Compile Include="GameObjects\OrangeWire.cs" />
+    <Compile Include="GameObjects\RedWire.cs" />
+    <Compile Include="GameObjects\GreenWire.cs" />
+    <Compile Include="GameObjects\BlueWire.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\NPC.cs" />
     <Compile Include="GameObjects\Player.cs" />
@@ -55,11 +59,8 @@
     <Compile Include="GameObjects\RedTerminal.cs" />
     <Compile Include="GameTiles\GameTile.cs" />
     <Compile Include="GameTiles\LabBenchTile.cs" />
+    <Compile Include="GameTiles\WallTile.cs" />
     <Compile Include="GameTiles\LabFloorTile.cs" />
-    <Compile Include="GameTiles\GreenWire.cs" />
-    <Compile Include="GameTiles\OrangeWire.cs" />
-    <Compile Include="GameTiles\BlueWire.cs" />
-    <Compile Include="GameTiles\RedWire.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />

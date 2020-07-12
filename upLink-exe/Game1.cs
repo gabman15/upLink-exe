@@ -77,6 +77,7 @@ namespace upLink_exe
             AssetManager.LoadTexture("blueTerminal", "sprites\\blueTerminal", 1);
             AssetManager.LoadTexture("greenTerminal", "sprites\\greenTerminal", 1);
             AssetManager.LoadTexture("orangeTerminal", "sprites\\orangeTerminal", 1);
+            AssetManager.LoadTexture("wall", "sprites\\wall", 1);
         }
 
         /// <summary>
