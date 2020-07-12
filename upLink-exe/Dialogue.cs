@@ -92,7 +92,7 @@ namespace upLink_exe
             _fading_out = true;
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (!_fading_out && _fade < 1)
             {
@@ -108,10 +108,10 @@ namespace upLink_exe
             spriteBatch.DrawString(_font, _text, _text_pos, Color.Black * _fade);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
 
-            float distance = _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float distance = _speed;
 
             if (_background_pos.Y >= MIN_Y)
             {
