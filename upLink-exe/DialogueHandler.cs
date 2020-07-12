@@ -21,7 +21,12 @@ namespace upLink_exe
         private bool is_running;
         private bool released;
 
-        public DialogueHandler(List<AbsDialogue> dialogues)
+        public DialogueHandler(Room room, Vector2 pos, Vector2 vel, Vector2 size) :base(room,pos,vel,size)
+        {
+            //nothing to see here 
+        }
+
+        public DialogueHandler(List<AbsDialogue> dialogues) :base(null,new Vector2(0,0), new Vector2(0, 0), new Vector2(0, 0))
         {
             _dialogues = dialogues;
             
@@ -33,7 +38,7 @@ namespace upLink_exe
             released = true;
         }
         
-        public DialogueHandler(ContentManager content)
+        public DialogueHandler(ContentManager content) : base(null, new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0))
         {
             SpriteFont _font = content.Load<SpriteFont>("test_font");
             Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
@@ -76,19 +81,19 @@ namespace upLink_exe
             }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (is_running)
             {
                 for (int i = 0; i < things_to_update.Count; i++)
                 {
-                    _dialogues[things_to_update[i]].Draw(gameTime, spriteBatch);
+                    _dialogues[things_to_update[i]].Draw(spriteBatch);
                 }
             }
            
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if (is_running)
             {
@@ -115,7 +120,7 @@ namespace upLink_exe
                 for (int i = 0; i < things_to_update.Count; i++)
                 {
                     //Console.WriteLine("things.count is: " + things_to_update[i]);
-                    _dialogues[things_to_update[i]].Update(gameTime);
+                    _dialogues[things_to_update[i]].Update();
                 }
 
             }

@@ -106,7 +106,7 @@ namespace upLink_exe
         }
 
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
 
             if (!_fading_out && _fade < 1)
@@ -153,7 +153,7 @@ namespace upLink_exe
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             //nothing to do here...
         }
