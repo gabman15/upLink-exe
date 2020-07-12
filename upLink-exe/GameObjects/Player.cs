@@ -106,6 +106,7 @@ namespace upLink_exe.GameObjects
                 Vector2 initialVelocity = velocity;
 
                 GameObject obj = currRoom.GameObjectList[i];
+                //Console.WriteLine("obj: " + obj);
                 if (obj == this)
                     continue;
 
@@ -124,7 +125,7 @@ namespace upLink_exe.GameObjects
                 {
                     Console.WriteLine("New collision with object");
                     Console.WriteLine(obj);
-                    
+                    obj.Collision(this);
                 }
             }
 

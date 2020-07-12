@@ -12,6 +12,7 @@ namespace upLink_exe.GameObjects
         public bool completed;
         public RedTerminal(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
+            Solid = true;
             AssetManager.RequestTexture("redTerminal", (frames) =>
             {
                 completed = false;
