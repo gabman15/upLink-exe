@@ -294,10 +294,11 @@ namespace upLink_exe
                 ProcessCommand(lines[i]);
             }
 
-            //DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
-            //dialogue.Layer = 100;
-            //GameObjectList.Add(dialogue);
-            //GameObjectIntersectList.Add(false);
+
+            DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
+            dialogue.Layer = 100;
+            GameObjectList.Add(dialogue);
+            GameObjectIntersectList.Add(false);
             //Console.WriteLine(dialogue);
             //Console.WriteLine(dialogue.Size);
             //Console.WriteLine(dialogue.Hitbox);

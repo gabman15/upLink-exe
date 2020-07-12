@@ -40,17 +40,17 @@ namespace upLink_exe
         
         public DialogueHandler(Room room, ContentManager content) : base(room, new Vector2(200, 0), new Vector2(0, 0), new Vector2(100, 100))
         {
-            SpriteFont _font = content.Load<SpriteFont>("test_font");
+            SpriteFont _font = content.Load<SpriteFont>("newFont");
             Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
             Texture2D image2 = content.Load<Texture2D>("400x300_Yara");
             Texture2D _gray_square = content.Load<Texture2D>("gray_square");
             Texture2D _text_background = content.Load<Texture2D>("dialogue_background");
 
-            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
-            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
-            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
-            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
-            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 1", _font, _text_background, _gray_square);
+            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "dialogue 2", _font, _text_background, _gray_square);
+            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 3", _font, _text_background, _gray_square);
+            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "dialogue 4", _font, _text_background, _gray_square);
+            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 5", _font, _text_background, _gray_square);
 
             List<AbsDialogue> dialogues = new List<AbsDialogue>()
             {
