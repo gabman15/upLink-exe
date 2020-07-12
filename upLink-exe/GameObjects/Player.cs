@@ -30,7 +30,7 @@ namespace upLink_exe.GameObjects
             draggingWire = "";
             placedWire = false;
 
-            AssetManager.RequestTexture("turtle", (frames) =>
+            AssetManager.RequestTexture("yara", (frames) =>
             {
                 idleSprite = frames;
                 Sprite = new SpriteData(idleSprite);
