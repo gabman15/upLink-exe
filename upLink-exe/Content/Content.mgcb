@@ -73,6 +73,30 @@
 /processorParam:TextureFormat=Color
 /build:gray_square.png
 
+#begin sounds/Escape.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/Escape.mp3
+
+#begin sounds/GameIsAfoot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/GameIsAfoot.mp3
+
+#begin sounds/Overture.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/Overture.mp3
+
+#begin sounds/TreesForTheForest.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/TreesForTheForest.mp3
+
 #begin sprites/ball/0.png
 /importer:TextureImporter
 /processor:TextureProcessor

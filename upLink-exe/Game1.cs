@@ -18,7 +18,7 @@ namespace upLink_exe
         private int shake_amount;
 
         Room currentRoom;
-        private int currentLevel;
+        public int currentLevel;
         public int lives;
         
 
@@ -78,6 +78,11 @@ namespace upLink_exe
             AssetManager.LoadTexture("greenTerminal", "sprites\\greenTerminal", 1);
             AssetManager.LoadTexture("orangeTerminal", "sprites\\orangeTerminal", 1);
             AssetManager.LoadTexture("wall", "sprites\\wall", 1);
+
+            AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
+            AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
+            AssetManager.LoadSound("gameAfootTheme", "sounds\\GameIsAfoot");
+            AssetManager.LoadSound("escapeTheme", "sounds\\Escape");
         }
 
         /// <summary>
@@ -105,6 +110,11 @@ namespace upLink_exe
             LoadLevel(currentLevel + 1);
         }
 
+        public void RestartLevel()
+        {
+            LoadLevel(currentLevel);
+        }
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -124,6 +134,8 @@ namespace upLink_exe
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kstate.IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                RestartLevel();
             currentRoom.Update();
 
             base.Update(gameTime);
