@@ -75,7 +75,7 @@ namespace upLink_exe.GameObjects
                 }
             }
 
-            Position += velocity*9;
+            Position += velocity*10;
             Velocity = velocity;
             oldKeyState = keyState;
             base.Update();

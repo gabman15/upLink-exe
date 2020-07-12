@@ -117,7 +117,7 @@ namespace upLink_exe.GameObjects
                 }
                 Velocity = vel;
             }
-            Position += Velocity;
+            //Position += Velocity;
             Sprite?.Update();
         }
 
