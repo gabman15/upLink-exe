@@ -105,6 +105,8 @@ namespace upLink_exe.GameObjects
                     return typeof(OrangeWire);
                 case "block":
                     return typeof(BlockObject);
+                case "exit":
+                    return typeof(ExitObject);
                 case "":
                     return typeof(GameObject);
             }

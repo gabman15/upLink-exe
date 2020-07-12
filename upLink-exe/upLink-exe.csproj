@@ -45,6 +45,7 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="GameObjects\BlockObject.cs" />
+    <Compile Include="GameObjects\ExitObject.cs" />
     <Compile Include="GameObjects\OrangeWire.cs" />
     <Compile Include="GameObjects\RedWire.cs" />
     <Compile Include="GameObjects\GreenWire.cs" />

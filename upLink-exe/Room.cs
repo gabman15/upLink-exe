@@ -171,6 +171,39 @@ namespace upLink_exe
                     }
             }
         }
+
+
+        public bool TermsCompleted()
+        {
+            for (int i = 0; i < GameObjectList.Count; i++)
+            {
+                GameObject obj = GameObjectList[i];
+
+                if (obj.GetType() == typeof(RedTerminal))
+                {
+                    if (!((RedTerminal)obj).completed)
+                        return false;
+                }
+                if (obj.GetType() == typeof(BlueTerminal))
+                {
+                    if (!((BlueTerminal)obj).completed)
+                        return false;
+                }
+                if (obj.GetType() == typeof(GreenTerminal))
+                {
+                    if (!((GreenTerminal)obj).completed)
+                        return false;
+                }
+                if (obj.GetType() == typeof(OrangeTerminal))
+                {
+                    if (!((OrangeTerminal)obj).completed)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+
         public bool CheckCollision(Rectangle collider)
         {
             for (int i = 0; i < GameObjectList.Count; i++)
