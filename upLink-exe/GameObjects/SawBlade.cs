@@ -25,7 +25,7 @@ namespace upLink_exe
         {
 
             // Load saw blade texture
-            AssetManager.RequestTexture("turtle", (frames) =>
+            AssetManager.RequestTexture("saw", (frames) =>
             {
                 sprites = frames;
                 Sprite = new SpriteData(sprites);
@@ -81,7 +81,6 @@ namespace upLink_exe
             base.Draw(spriteBatch);
             postSprite?.Draw(spriteBatch, _post1);
             postSprite?.Draw(spriteBatch, _post2);
-
         }
 
         public override void Collision(Player player)

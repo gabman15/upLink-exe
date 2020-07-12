@@ -60,6 +60,10 @@
     <Compile Include="GameObjects\RedTerminal.cs" />
     <Compile Include="GameTiles\GameTile.cs" />
     <Compile Include="GameTiles\LabBenchTile.cs" />
+    <Compile Include="GameTiles\TreeTile.cs" />
+    <Compile Include="GameTiles\RockTile.cs" />
+    <Compile Include="GameTiles\GrassTile.cs" />
+    <Compile Include="GameTiles\DoorTile.cs" />
     <Compile Include="GameTiles\WallTile.cs" />
     <Compile Include="GameTiles\LabFloorTile.cs" />
     <Compile Include="Program.cs" />
