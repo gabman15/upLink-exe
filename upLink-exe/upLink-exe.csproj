@@ -69,6 +69,7 @@
     <Compile Include="Dialogue.cs" />
     <Compile Include="AbsDialogue.cs" />
     <Compile Include="IntenseDialogue.cs" />
+    <Compile Include="GameObjects\SawBlade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
