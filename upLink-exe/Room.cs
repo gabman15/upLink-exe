@@ -213,7 +213,7 @@ namespace upLink_exe
             {
                 ProcessCommand(lines[i]);
             }
-            //DialogueHandler dialogue = new DialogueHandler(Game.Content);
+            DialogueHandler dialogue = new DialogueHandler(Game.Content);
 
         }
         public static int HorizRectDistance(Rectangle a, Rectangle b) //not too sure where to put these
