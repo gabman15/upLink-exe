@@ -215,15 +215,15 @@ namespace upLink_exe
                 ProcessCommand(lines[i]);
             }
 
-            SawBlade saw = new SawBlade(this, new Vector2(200, 0));
-            saw.Layer = 100;
-            GameObjectList.Add(saw);
-            GameObjectIntersectList.Add(false);
-
-            //DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
-            //dialogue.Layer = 100;
-            //GameObjectList.Add(dialogue);
+            //SawBlade saw = new SawBlade(this, new Vector2(200, 0));
+            //saw.Layer = 100;
+            //GameObjectList.Add(saw);
             //GameObjectIntersectList.Add(false);
+
+            DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
+            dialogue.Layer = 100;
+            GameObjectList.Add(dialogue);
+            GameObjectIntersectList.Add(false);
             //Console.WriteLine(dialogue);
             //Console.WriteLine(dialogue.Size);
             //Console.WriteLine(dialogue.Hitbox);

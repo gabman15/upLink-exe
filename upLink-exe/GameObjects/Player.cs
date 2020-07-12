@@ -147,7 +147,7 @@ namespace upLink_exe.GameObjects
                     obj.Collision(this);
                     currRoom.GameObjectIntersectList[i] = collisionOccured;
                 }
-                if
+                
             }
 
             if (draggingWire != "" && !placedWire && (Math.Abs(Position.X - draggingFrom.Position.X) >= 100 || Math.Abs(Position.Y - draggingFrom.Position.Y) >= 100))
