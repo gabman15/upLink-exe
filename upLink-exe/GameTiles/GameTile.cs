@@ -56,6 +56,14 @@ namespace upLink_exe.GameTiles
                     return typeof(WallTile);
                 case "labBench":
                     return typeof(LabBenchTile);
+                case "grass":
+                    return typeof(GrassTile);
+                case "tree":
+                    return typeof(TreeTile);
+                case "rock":
+                    return typeof(RockTile);
+                case "door":
+                    return typeof(DoorTile);
             }
             return null;
         }

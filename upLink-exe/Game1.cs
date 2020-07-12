@@ -66,7 +66,7 @@ namespace upLink_exe
             AssetManager.LoadTexture("monaco", "sprites\\monaco", 1);
             AssetManager.LoadTexture("turtleFlare", "sprites\\turtleFlare", 1);
             AssetManager.LoadTexture("turtle", "sprites\\turtle", 1);
-            AssetManager.LoadTexture("yara", "sprites\\yaraSprite", 22);
+            AssetManager.LoadTexture("yara", "sprites\\yaraSprite", 23);
             AssetManager.LoadTexture("labFloor", "sprites\\labFloorTile",1);
             AssetManager.LoadTexture("labBench", "sprites\\labBench", 1);
             AssetManager.LoadTexture("redWire", "sprites\\redWire", 1);
@@ -78,6 +78,11 @@ namespace upLink_exe
             AssetManager.LoadTexture("greenTerminal", "sprites\\greenTerminal", 1);
             AssetManager.LoadTexture("orangeTerminal", "sprites\\orangeTerminal", 1);
             AssetManager.LoadTexture("wall", "sprites\\wall", 1);
+            AssetManager.LoadTexture("grass", "sprites\\grass", 1);
+            AssetManager.LoadTexture("tree", "sprites\\tree", 1);
+            AssetManager.LoadTexture("rock", "sprites\\rock", 1);
+            AssetManager.LoadTexture("saw", "sprites\\saw", 3);
+            AssetManager.LoadTexture("door", "sprites\\door", 1);
 
             //AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
             //AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
