@@ -64,11 +64,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="SpriteData.cs" />
     <Compile Include="DialogueHandler.cs" />
     <Compile Include="Dialogue.cs" />
     <Compile Include="AbsDialogue.cs" />
     <Compile Include="IntenseDialogue.cs" />
+    <Compile Include="GameObjects\SawBlade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

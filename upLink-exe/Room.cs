@@ -20,43 +20,78 @@ namespace upLink_exe
         public int Width { get; set; }
         public int Height { get; set; }
         public Game1 Game { get; set; }
-        //public SoundManager Sounds { get; set; }
+        public SoundManager Sounds { get; set; }
         private int roomToGoTo;
         private GameObject background;
+
+        private SoundEffect forestTheme;
+        private SoundEffect escapeTheme;
+        private SoundEffect gameAfootTheme;
+        private SoundEffect overtureTheme;
 
 
         /// <summary>
         /// frames/update
         /// </summary>
         /// 
-            
+
         //public string NoteText { get; set; }
         public Room(Game1 game)
         {
             Game = game;
             background = new GameObject(this, new Vector2(0,0), new Vector2(0,0), new Vector2(800, 800));
-            //Sounds = new SoundManager();
+            Sounds = new SoundManager();
 
             GameObjectList = new List<GameObject>();
             GameObjectIntersectList = new List<bool>();
             GameTileList = new List<GameTile>();
+
+            AssetManager.RequestSound("forestTheme", (sound) =>
+            {
+                forestTheme = sound;
+
+            });
+            AssetManager.RequestSound("escapeTheme", (sound) =>
+            {
+                escapeTheme = sound;
+            });
+            AssetManager.RequestSound("overtureTheme", (sound) =>
+            {
+                overtureTheme = sound;
+            });
+            AssetManager.RequestSound("gameAfootTheme", (sound) =>
+            {
+                gameAfootTheme = sound;
+            });
 
             Width = 512;
             Height = 512;
         }
         public void Update()
         {
+            if (Sounds.CurrentMusic == null)
+            {
+                if(Game.currentLevel == 1 || Game.currentLevel == 2)
+                    Sounds.PlayMusic(overtureTheme);
+                if (Game.currentLevel == 3 || Game.currentLevel == 4)
+                    Sounds.PlayMusic(gameAfootTheme);
+                if (Game.currentLevel == 5 || Game.currentLevel == 6)
+                    Sounds.PlayMusic(escapeTheme);
+                if (Game.currentLevel == 7 || Game.currentLevel == 8)
+                    Sounds.PlayMusic(forestTheme);
+            }
+
             for (int i = 0; i < GameObjectList.Count; i++)
             {
                 GameObject obj = GameObjectList[i];
                 //Console.WriteLine(obj + " pos:" + obj.Position);
                 obj.Update();
             }
-            //Sounds.Update();
+            Sounds.Update();
         }
         public void Destroy()
         {
-            //Sounds.Destroy();
+            Sounds.Destroy();
         }
         public void ChangeRoom(int room)
         {
@@ -97,6 +132,17 @@ namespace upLink_exe
                         GameObject obj = (GameObject)type.GetConstructor(new Type[] { typeof(Room), typeof(Vector2) }).Invoke(new object[] { this, position });
                         obj.Layer = int.Parse(parts[4]);
                         GameObjectList.Add(obj);
+                        GameObjectIntersectList.Add(false);
+                        break;
+                    }
+                case "createsaw":
+                    {
+                        Vector2 position = new Vector2(int.Parse(parts[2]), int.Parse(parts[3]));
+                        Vector2 post1 = new Vector2(int.Parse(parts[4]), int.Parse(parts[5]));
+                        Vector2 post2 = new Vector2(int.Parse(parts[6]), int.Parse(parts[7]));
+                        SawBlade saw = new SawBlade(this, position, post1, post2);
+                        saw.Layer = int.Parse(parts[8]);
+                        GameObjectList.Add(saw);
                         GameObjectIntersectList.Add(false);
                         break;
                     }
@@ -215,10 +261,6 @@ namespace upLink_exe
                 ProcessCommand(lines[i]);
             }
 
-            //SawBlade saw = new SawBlade(this, new Vector2(200, 0));
-            //saw.Layer = 100;
-            //GameObjectList.Add(saw);
-            //GameObjectIntersectList.Add(false);
 
             DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
             dialogue.Layer = 100;
