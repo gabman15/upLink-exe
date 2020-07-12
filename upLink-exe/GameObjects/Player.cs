@@ -86,13 +86,29 @@ namespace upLink_exe.GameObjects
             if (draggingWire != "" && !placedWire)
             {
                 if (draggingWire == "red")
-                    currRoom.GameObjectList.Add(new RedWire(currRoom, Position));
+                {
+                    GameObject obj = new RedWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                }
                 if (draggingWire == "green")
-                    currRoom.GameObjectList.Add(new GreenWire(currRoom, Position));
+                {
+                    GameObject obj = new GreenWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                }
                 if (draggingWire == "blue")
-                    currRoom.GameObjectList.Add(new BlueWire(currRoom, Position));
+                {
+                    GameObject obj = new BlueWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                }
                 if (draggingWire == "orange")
-                    currRoom.GameObjectList.Add(new OrangeWire(currRoom, Position));
+                {
+                    GameObject obj = new OrangeWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                }
                 placedWire = true;
             }
 
