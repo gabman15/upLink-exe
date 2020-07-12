@@ -57,7 +57,7 @@ namespace upLink_exe
             _gray_square = gray_square;
             _location1 = new Vector2(250, 90);
             _background_location = new Vector2(15, 490);
-            _text = text;
+            _text = Wrap_text(text, font);
             _font = font;
         }
 
