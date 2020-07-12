@@ -143,7 +143,7 @@ namespace upLink_exe.GameObjects
                 bool prevCollisionOccured = currRoom.GameObjectIntersectList[i];
 
 
-                if (movementStage == 0 && collisionOccured && !prevCollisionOccured)
+                if (collisionOccured && !prevCollisionOccured)
                 {
                     
                     Console.WriteLine("New collision with object");
