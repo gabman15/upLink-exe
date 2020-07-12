@@ -24,7 +24,7 @@ namespace upLink_exe.GameObjects
 
         public override void Collision(Player player)
         {
-
+            player.draggingWire = "red";
         }
     }
 }

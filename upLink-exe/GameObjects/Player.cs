@@ -17,10 +17,14 @@ namespace upLink_exe.GameObjects
         private KeyboardState keyState, oldKeyState = Keyboard.GetState();
         private int movementStage = 0;
         public static float MoveSpeed = 10;
+        public string draggingWire;
+        private bool placedWire;
 
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
             spawnLoc = pos;
+            draggingWire = "";
+            placedWire = false;
 
             AssetManager.RequestTexture("turtle", (frames) =>
             {
@@ -57,27 +61,46 @@ namespace upLink_exe.GameObjects
                 {
                     velocity.Y = -MoveSpeed;
                     movementStage = 10;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.S) && oldKeyState.IsKeyDown(Keys.S))
                 {
                     velocity.Y = MoveSpeed;
                     movementStage = 10;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.A) && oldKeyState.IsKeyDown(Keys.A))
                 {
                     velocity.X = -MoveSpeed;
                     movementStage = 10;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.D) && oldKeyState.IsKeyDown(Keys.D))
                 {
                     velocity.X = MoveSpeed;
                     movementStage = 10;
+                    placedWire = false;
                 }
             }
 
+
+            //Drag Wires
+            if (draggingWire != "" && !placedWire)
+            {
+                if (draggingWire == "red")
+                    currRoom.GameObjectList.Add(new RedWire(currRoom, Position));
+                if (draggingWire == "green")
+                    currRoom.GameObjectList.Add(new GreenWire(currRoom, Position));
+                if (draggingWire == "blue")
+                    currRoom.GameObjectList.Add(new BlueWire(currRoom, Position));
+                if (draggingWire == "orange")
+                    currRoom.GameObjectList.Add(new OrangeWire(currRoom, Position));
+                placedWire = true;
+            }
+
+
+
             // Deal with collisions
-
-
             for (int i = 0; i < currRoom.GameObjectList.Count; i++)
             {
                 Vector2 initialVelocity = velocity;
