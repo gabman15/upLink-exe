@@ -17,6 +17,7 @@ namespace upLink_exe.GameObjects
         private int movementStage = 0;
         public static float MoveSpeed = 10;
         public string draggingWire;
+        public GameObject draggingFrom;
         private bool placedWire;
         private Vector2 prevPosition;
 
@@ -90,24 +91,28 @@ namespace upLink_exe.GameObjects
                     GameObject obj = new RedWire(currRoom, Position);
                     obj.Layer = 2;
                     currRoom.GameObjectList.Add(obj);
+                    currRoom.GameObjectIntersectList.Add(false);
                 }
                 if (draggingWire == "green")
                 {
                     GameObject obj = new GreenWire(currRoom, Position);
                     obj.Layer = 2;
                     currRoom.GameObjectList.Add(obj);
+                    currRoom.GameObjectIntersectList.Add(false);
                 }
                 if (draggingWire == "blue")
                 {
                     GameObject obj = new BlueWire(currRoom, Position);
                     obj.Layer = 2;
                     currRoom.GameObjectList.Add(obj);
+                    currRoom.GameObjectIntersectList.Add(false);
                 }
                 if (draggingWire == "orange")
                 {
                     GameObject obj = new OrangeWire(currRoom, Position);
                     obj.Layer = 2;
                     currRoom.GameObjectList.Add(obj);
+                    currRoom.GameObjectIntersectList.Add(false);
                 }
                 placedWire = true;
             }
