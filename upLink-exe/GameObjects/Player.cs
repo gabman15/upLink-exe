@@ -16,7 +16,7 @@ namespace upLink_exe.GameObjects
         private Texture2D[] idleSprite;
         private KeyboardState keyState, oldKeyState = Keyboard.GetState();
         private int movementStage = 0;
-        public static float MoveSpeed = 10f;
+        public static float MoveSpeed = 10;
 
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
@@ -38,6 +38,7 @@ namespace upLink_exe.GameObjects
 
         public override void Update()
         {
+            Console.WriteLine("pos: " + Position);
             Vector2 velocity = Velocity;
             keyState = Keyboard.GetState();
             bool collisionOccured = false;

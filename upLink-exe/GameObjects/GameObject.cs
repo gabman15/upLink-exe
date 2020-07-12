@@ -87,6 +87,16 @@ namespace upLink_exe.GameObjects
                     return typeof(Player);
                 case "npc":
                     return typeof(NPC);
+                case "redTerminal":
+                    return typeof(RedTerminal);
+                case "blueTerminal":
+                    return typeof(BlueTerminal);
+                case "greenTerminal":
+                    return typeof(GreenTerminal);
+                case "orangeTerminal":
+                    return typeof(OrangeTerminal);
+                case "block":
+                    return typeof(BlockObject);
                 case "":
                     return typeof(GameObject);
             }

@@ -2,5 +2,8 @@ width 800
 height 800
 background beach
 
-createobject player 32 32 5
-createobject player 64 64 5
+createobject player 0 0 7
+createtile labFloor 0 0 6
+createtile labFloor 100 0 6
+createtile labFloor 100 100 6
+createtile labFloor 0 100 6
