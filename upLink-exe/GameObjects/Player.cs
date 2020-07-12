@@ -18,8 +18,10 @@ namespace upLink_exe.GameObjects
         public static float MoveSpeed = 10;
         public string draggingWire;
         public GameObject draggingFrom;
-        private bool placedWire;
+        public GameObject justPlacedWire;
+        public bool placedWire;
         private Vector2 prevPosition;
+
 
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
@@ -40,6 +42,7 @@ namespace upLink_exe.GameObjects
             
             Hitbox = new Rectangle(0, 0, 100, 100);
         }
+        
 
         public override void Update()
         {
@@ -60,74 +63,61 @@ namespace upLink_exe.GameObjects
                 {
                     velocity.Y = -MoveSpeed;
                     movementStage = 10;
-                    //placedWire = false;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.S) && oldKeyState.IsKeyDown(Keys.S))
                 {
                     velocity.Y = MoveSpeed;
                     movementStage = 10;
-                    //placedWire = false;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.A) && oldKeyState.IsKeyDown(Keys.A))
                 {
                     velocity.X = -MoveSpeed;
                     movementStage = 10;
-                    //placedWire = false;
+                    placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.D) && oldKeyState.IsKeyDown(Keys.D))
                 {
                     velocity.X = MoveSpeed;
                     movementStage = 10;
-                    
+                    placedWire = false;
                 }
+                /*if (completedTerm != null)
+                {
+                    completedTerm.Solid = true;
+                    completedTerm = null;
+                }*/
             }
 
 
             //Drag Wires
-            Console.WriteLine(Position + ":" + draggingFrom?.Position);
+
+
             if (draggingWire != "" && !placedWire && (Math.Abs(Position.X - draggingFrom.Position.X) >= 100 || Math.Abs(Position.Y - draggingFrom.Position.Y) >= 100))
             {
-                if (draggingWire == "red")
-                {
-                    GameObject obj = new RedWire(currRoom, Position);
-                    obj.Layer = 2;
-                    currRoom.GameObjectList.Add(obj);
-                    currRoom.GameObjectIntersectList.Add(false);
-                }
-                if (draggingWire == "green")
-                {
-                    GameObject obj = new GreenWire(currRoom, Position);
-                    obj.Layer = 2;
-                    currRoom.GameObjectList.Add(obj);
-                    currRoom.GameObjectIntersectList.Add(false);
-                }
-                if (draggingWire == "blue")
-                {
-                    GameObject obj = new BlueWire(currRoom, Position);
-                    obj.Layer = 2;
-                    currRoom.GameObjectList.Add(obj);
-                    currRoom.GameObjectIntersectList.Add(false);
-                }
-                if (draggingWire == "orange")
-                {
-                    GameObject obj = new OrangeWire(currRoom, Position);
-                    obj.Layer = 2;
-                    currRoom.GameObjectList.Add(obj);
-                    currRoom.GameObjectIntersectList.Add(false);
-                }
-                placedWire = true;
+                draggingFrom.Solid = true;
             }
 
 
 
-            // Deal with collisions
-            bool collisionOccured = false;
+                // Deal with collisions
+                bool collisionOccured = false;
             bool solidCollisionOccured = false;
             for (int i = 0; i < currRoom.GameObjectList.Count; i++)
             {
                 Vector2 initialVelocity = velocity;
 
                 GameObject obj = currRoom.GameObjectList[i];
+
+                if (obj.GetType() == typeof(RedTerminal))
+                    ((RedTerminal)obj).UpdateWithPlayerPos(this);
+                if (obj.GetType() == typeof(BlueTerminal))
+                    ((BlueTerminal)obj).UpdateWithPlayerPos(this);
+                if (obj.GetType() == typeof(GreenTerminal))
+                    ((GreenTerminal)obj).UpdateWithPlayerPos(this);
+                if (obj.GetType() == typeof(OrangeTerminal))
+                    ((OrangeTerminal)obj).UpdateWithPlayerPos(this);
                 //Console.WriteLine("obj: " + obj);
                 if (obj == this)
                     continue;
@@ -143,14 +133,56 @@ namespace upLink_exe.GameObjects
                 bool prevCollisionOccured = currRoom.GameObjectIntersectList[i];
 
 
-                if (collisionOccured && !prevCollisionOccured)
+                if (solidCollisionOccured && !prevCollisionOccured)
                 {
                     
                     Console.WriteLine("New collision with object");
                     Console.WriteLine(obj);
+                    
+                    currRoom.GameObjectIntersectList[i] = collisionOccured;
+                }
+                else if (collisionOccured && !prevCollisionOccured && movementStage == 0)
+                {
                     obj.Collision(this);
                     currRoom.GameObjectIntersectList[i] = collisionOccured;
                 }
+            }
+
+            if (draggingWire != "" && !placedWire && (Math.Abs(Position.X - draggingFrom.Position.X) >= 100 || Math.Abs(Position.Y - draggingFrom.Position.Y) >= 100))
+            {
+                if (draggingWire == "red")
+                {
+                    GameObject obj = new RedWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                    justPlacedWire = obj;
+                    currRoom.GameObjectIntersectList.Add(false);
+                }
+                if (draggingWire == "green")
+                {
+                    GameObject obj = new GreenWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                    justPlacedWire = obj;
+                    currRoom.GameObjectIntersectList.Add(false);
+                }
+                if (draggingWire == "blue")
+                {
+                    GameObject obj = new BlueWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                    justPlacedWire = obj;
+                    currRoom.GameObjectIntersectList.Add(false);
+                }
+                if (draggingWire == "orange")
+                {
+                    GameObject obj = new OrangeWire(currRoom, Position);
+                    obj.Layer = 2;
+                    currRoom.GameObjectList.Add(obj);
+                    justPlacedWire = obj;
+                    currRoom.GameObjectIntersectList.Add(false);
+                }
+                placedWire = true;
             }
 
             prevPosition = Position;
@@ -161,13 +193,12 @@ namespace upLink_exe.GameObjects
                 velocity.Y = 0;
                 velocity.X = 0;
             }
-            else
-            {
-                placedWire = false;
-            }
 
             Velocity = velocity;
             oldKeyState = keyState;
+
+            
+
             base.Update();
         }
 

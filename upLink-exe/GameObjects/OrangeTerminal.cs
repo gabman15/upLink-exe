@@ -24,7 +24,26 @@ namespace upLink_exe.GameObjects
 
         public override void Collision(Player player)
         {
-            player.draggingWire = "orange";
+            if (!completed)
+            {
+                if (player.draggingWire == "")
+                {
+                    player.draggingWire = "orange";
+                    player.draggingFrom = this;
+                }
+                else if (player.draggingWire == "orange" && player.draggingFrom != this)
+                {
+                    completed = true;
+                    ((OrangeTerminal)player.draggingFrom).completed = true;
+                    player.draggingWire = "";
+                    player.draggingFrom = null;
+                }
+            }
+        }
+        public void UpdateWithPlayerPos(Player player)
+        {
+            if ((Math.Abs(Position.X - player.Position.X) >= 100 || Math.Abs(Position.Y - player.Position.Y) >= 100) && completed)
+                Solid = true;
         }
     }
 }
