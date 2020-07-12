@@ -13,8 +13,8 @@ namespace upLink_exe
     public class SawBlade : GameObject
     {
 
-        private Texture2D[] sprites;
-        private Texture2D[] postSprites;
+        //private Texture2D[] sprites;
+        //private Texture2D[] postSprites;
         public SpriteData postSprite { get; set; }
         private Vector2 _post1;
         private Vector2 _post2;
@@ -27,23 +27,20 @@ namespace upLink_exe
             // Load saw blade texture
             AssetManager.RequestTexture("saw", (frames) =>
             {
-                sprites = frames;
-                Sprite = new SpriteData(sprites);
+                Sprite = new SpriteData(frames);
                 Sprite.Size = new Vector2(100, 100);
                 Sprite.Layer = Layer;
                 Sprite.Offset = new Vector2(0, 0);
             });
 
             // Load saw post
-            AssetManager.RequestTexture("yara", (frames) =>
+            AssetManager.RequestTexture("post", (frames) =>
             {
-                postSprites = frames;
-                postSprite = new SpriteData(postSprites);
+                postSprite = new SpriteData(frames);
                 postSprite.Size = new Vector2(100, 100);
                 postSprite.Layer = Layer;
                 postSprite.Offset = new Vector2(0, 0);
             });
-
 
             _post1 = post1;
             _post2 = post2;

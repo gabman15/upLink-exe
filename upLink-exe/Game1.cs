@@ -83,6 +83,7 @@ namespace upLink_exe
             AssetManager.LoadTexture("rock", "sprites\\rock", 1);
             AssetManager.LoadTexture("saw", "sprites\\saw", 3);
             AssetManager.LoadTexture("door", "sprites\\door", 1);
+            AssetManager.LoadTexture("post", "sprites\\post", 1);
 
             //AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
             //AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
