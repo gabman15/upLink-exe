@@ -60,31 +60,32 @@ namespace upLink_exe.GameObjects
                 {
                     velocity.Y = -MoveSpeed;
                     movementStage = 10;
-                    placedWire = false;
+                    //placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.S) && oldKeyState.IsKeyDown(Keys.S))
                 {
                     velocity.Y = MoveSpeed;
                     movementStage = 10;
-                    placedWire = false;
+                    //placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.A) && oldKeyState.IsKeyDown(Keys.A))
                 {
                     velocity.X = -MoveSpeed;
                     movementStage = 10;
-                    placedWire = false;
+                    //placedWire = false;
                 }
                 else if (!keyState.IsKeyDown(Keys.D) && oldKeyState.IsKeyDown(Keys.D))
                 {
                     velocity.X = MoveSpeed;
                     movementStage = 10;
-                    placedWire = false;
+                    
                 }
             }
-            
+
 
             //Drag Wires
-            if (draggingWire != "" && !placedWire)
+            Console.WriteLine(Position + ":" + draggingFrom?.Position);
+            if (draggingWire != "" && !placedWire && (Math.Abs(Position.X - draggingFrom.Position.X) >= 100 || Math.Abs(Position.Y - draggingFrom.Position.Y) >= 100))
             {
                 if (draggingWire == "red")
                 {
@@ -140,13 +141,15 @@ namespace upLink_exe.GameObjects
 
                 // Check if there was a previous collision
                 bool prevCollisionOccured = currRoom.GameObjectIntersectList[i];
-                currRoom.GameObjectIntersectList[i] = collisionOccured;
+                
 
                 if (collisionOccured && !prevCollisionOccured)
                 {
+                    
                     Console.WriteLine("New collision with object");
                     Console.WriteLine(obj);
                     obj.Collision(this);
+                    currRoom.GameObjectIntersectList[i] = collisionOccured;
                 }
             }
 
@@ -157,6 +160,10 @@ namespace upLink_exe.GameObjects
             {
                 velocity.Y = 0;
                 velocity.X = 0;
+            }
+            else
+            {
+                placedWire = false;
             }
 
             Velocity = velocity;
