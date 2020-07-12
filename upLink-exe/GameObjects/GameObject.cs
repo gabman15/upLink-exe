@@ -51,73 +51,6 @@ namespace upLink_exe.GameObjects
 
         public virtual void Update()
         {
-            //Console.WriteLine("Object updating!");
-            if (Velocity.X != 0 || Velocity.Y != 0)
-            {
-                Vector2 vel = Velocity;
-                for (int i = 0; i < currRoom.GameObjectList.Count; i++)
-                {
-                    GameObject obj = currRoom.GameObjectList[i];
-                    if (obj.Solid)
-                    {
-                        //feel like there should be a better way to do collisions but idk that way
-                        Rectangle targetRect = AddVectorToRect(obj.Hitbox, obj.Position, VectorCeil(obj.Velocity));
-                        Rectangle fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(0, vel.Y)));
-                        while (RectangleInRectangle(fromRect, targetRect))
-                        {
-                            if (Math.Abs(vel.Y) < CollisionPrecision)
-                            {
-                                vel.Y = 0;
-                                break;
-                            }
-                            else
-                            {
-                                vel.Y -= Math.Sign(vel.Y) * CollisionPrecision;
-                                fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(0, vel.Y)));
-                            }
-                        }
-                        fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(vel.X, 0)));
-                        while (RectangleInRectangle(fromRect, targetRect))
-                        {
-                            if (Math.Abs(vel.X) < CollisionPrecision)
-                            {
-                                vel.X = 0;
-                                break;
-                            }
-                            else
-                            {
-                                vel.X -= Math.Sign(vel.X) * CollisionPrecision;
-                                fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(vel.X, 0)));
-                            }
-                        }
-                        fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(vel));
-                        while (RectangleInRectangle(fromRect, targetRect))
-                        {
-                            if (Math.Abs(vel.X) < CollisionPrecision)
-                            {
-                                vel.X = 0;
-                                break;
-                            }
-                            else
-                            {
-                                vel.X -= Math.Sign(vel.X) * CollisionPrecision;
-                            }
-                            if (Math.Abs(vel.Y) < CollisionPrecision)
-                            {
-                                vel.Y = 0;
-                                break;
-                            }
-                            else
-                            {
-                                vel.Y -= Math.Sign(vel.Y) * CollisionPrecision;
-                            }
-                            fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(vel));
-                        }
-                    }
-                }
-                Velocity = vel;
-            }
-            Position += Velocity;
             Sprite?.Update();
         }
 
@@ -152,6 +85,8 @@ namespace upLink_exe.GameObjects
             {
                 case "player":
                     return typeof(Player);
+                case "npc":
+                    return typeof(NPC);
                 case "":
                     return typeof(GameObject);
             }
