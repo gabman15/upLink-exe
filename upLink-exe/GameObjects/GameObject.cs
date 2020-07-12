@@ -152,6 +152,16 @@ namespace upLink_exe.GameObjects
             {
                 case "player":
                     return typeof(Player);
+                case "redTerminal":
+                    return typeof(RedTerminal);
+                case "blueTerminal":
+                    return typeof(BlueTerminal);
+                case "greenTerminal":
+                    return typeof(GreenTerminal);
+                case "orangeTerminal":
+                    return typeof(OrangeTerminal);
+                case "block":
+                    return typeof(BlockObject);
                 case "":
                     return typeof(GameObject);
             }
