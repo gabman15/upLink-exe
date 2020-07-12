@@ -27,7 +27,6 @@ namespace upLink_exe.GameObjects
                 Sprite.Offset = new Vector2(0, 0);
             });
 
-
             Hitbox = new Rectangle(0, 0, 100, 100);
             Solid = false;
 

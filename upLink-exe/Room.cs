@@ -15,6 +15,7 @@ namespace upLink_exe
     public class Room
     {
         public List<GameObject> GameObjectList { get; set; }
+        public List<bool> GameObjectIntersectList { get; set; }
         public List<GameTile> GameTileList { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -37,6 +38,7 @@ namespace upLink_exe
             //Sounds = new SoundManager();
 
             GameObjectList = new List<GameObject>();
+            GameObjectIntersectList = new List<bool>();
             GameTileList = new List<GameTile>();
 
             Width = 512;
@@ -94,6 +96,7 @@ namespace upLink_exe
                         GameObject obj = (GameObject)type.GetConstructor(new Type[] { typeof(Room), typeof(Vector2) }).Invoke(new object[] { this, position });
                         obj.Layer = int.Parse(parts[4]);
                         GameObjectList.Add(obj);
+                        GameObjectIntersectList.Add(false);
                         break;
                     }
                 case "createtile":
@@ -103,6 +106,7 @@ namespace upLink_exe
                         GameTile obj = (GameTile)type.GetConstructor(new Type[] { typeof(Room), typeof(Vector2) }).Invoke(new object[] { this, position });
                         obj.Layer = (float)int.Parse(parts[4]) / 100f;
                         GameTileList.Add(obj);
+                        GameObjectIntersectList.Add(false);
                         break;
                     }
                 case "background":
@@ -209,6 +213,7 @@ namespace upLink_exe
             {
                 ProcessCommand(lines[i]);
             }
+            //DialogueHandler dialogue = new DialogueHandler(Game.Content);
 
         }
         public static int HorizRectDistance(Rectangle a, Rectangle b) //not too sure where to put these

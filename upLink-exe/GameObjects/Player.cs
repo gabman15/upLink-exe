@@ -117,8 +117,8 @@ namespace upLink_exe.GameObjects
 
 
                 // Check if there was a previous collision
-                Tuple<bool, bool, Vector2> prevCollisionTuple = checkCollision(prevPosition, Hitbox, velocity, obj);
-                bool prevCollisionOccured = prevCollisionTuple.Item1;
+                bool prevCollisionOccured = currRoom.GameObjectIntersectList[i];
+                currRoom.GameObjectIntersectList[i] = collisionOccured;
 
                 if (collisionOccured && !prevCollisionOccured)
                 {
@@ -129,6 +129,7 @@ namespace upLink_exe.GameObjects
             }
 
             prevPosition = Position;
+            
             Position += velocity;
             if (solidCollisionOccured)
             {

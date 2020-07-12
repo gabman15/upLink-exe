@@ -69,6 +69,7 @@
     <Compile Include="Dialogue.cs" />
     <Compile Include="AbsDialogue.cs" />
     <Compile Include="IntenseDialogue.cs" />
+    <Compile Include="DialogueHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -128,6 +129,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="Content\400x300_Yara.png" />
+    <None Include="Content\400x300_Yon.png" />
+    <None Include="Content\dialogue_background_TEST.png" />
+    <None Include="Content\Experimenter_1_TEST.png" />
+    <None Include="Content\gray_square.png" />
+    <None Include="Content\test_font.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Rooms\" />
