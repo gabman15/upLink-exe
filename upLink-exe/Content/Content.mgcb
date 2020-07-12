@@ -543,13 +543,6 @@
 
 #begin test_font.spritefont
 /importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:test_font.spritefont
-
-#begin test_font.spritefont
-/importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed

@@ -43,8 +43,8 @@ namespace upLink_exe
             _location1 = new Vector2(50, 90);
             _location2 = new Vector2(450, 90);
             _background_location = new Vector2(15, 490);
-            //_text = Wrap_text(text, font);
-            _text = text;
+            _text = Wrap_text(text, font);
+            //_text = text;
             _font = font;
             _speaking1 = speaking1;
             _speaking2 = speaking2;
@@ -59,8 +59,8 @@ namespace upLink_exe
             _gray_square = gray_square;
             _location1 = new Vector2(250, 90);
             _background_location = new Vector2(15, 490);
-            //_text = Wrap_text(text, font);
-            _text = text;
+            _text = Wrap_text(text, font);
+            //_text = text;
             _font = font;
         }
 
@@ -77,7 +77,7 @@ namespace upLink_exe
         //
         //taken from https://gist.github.com/Sankra/5585584
         //
-        /*
+        
         private string Wrap_text(string text, SpriteFont font)
         {
             //Console.WriteLine(font);
@@ -108,7 +108,7 @@ namespace upLink_exe
 
             return wrappedText.ToString();
         }
-        */
+        
 
         public override void Draw(SpriteBatch spriteBatch)
         {
