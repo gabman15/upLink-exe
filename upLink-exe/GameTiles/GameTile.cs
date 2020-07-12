@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace upLink_exe
+namespace upLink_exe.GameTiles
 {
     public abstract class GameTile
     {
@@ -48,10 +48,11 @@ namespace upLink_exe
         }
         public static Type GetObjectFromName(string name)
         {
-            /*switch(name)
+            switch(name)
             {
-                
-            }*/
+                case "labFloor":
+                    return typeof(LabFloorTile);
+            }
             return null;
         }
     }
