@@ -29,7 +29,7 @@ namespace upLink_exe.GameObjects
 
 
             Hitbox = new Rectangle(0, 0, 100, 100);
-            Solid = true;
+            Solid = false;
 
         }
     }

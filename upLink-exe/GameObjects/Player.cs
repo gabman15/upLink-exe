@@ -18,10 +18,12 @@ namespace upLink_exe.GameObjects
         public static float MoveSpeed = 10;
         public string draggingWire;
         private bool placedWire;
+        private Vector2 prevPosition;
 
         public Player(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
             spawnLoc = pos;
+            prevPosition = Position;
             draggingWire = "";
             placedWire = false;
 
@@ -107,19 +109,26 @@ namespace upLink_exe.GameObjects
                 if (obj == this)
                     continue;
 
+                // Check for collision
                 Tuple<bool, bool, Vector2> collisionTuple = checkCollision(Position, Hitbox, velocity, obj);
                 collisionOccured = collisionTuple.Item1;
                 solidCollisionOccured = collisionTuple.Item2;
                 velocity = collisionTuple.Item3;
 
-                if (collisionOccured)
+
+                // Check if there was a previous collision
+                Tuple<bool, bool, Vector2> prevCollisionTuple = checkCollision(prevPosition, Hitbox, velocity, obj);
+                bool prevCollisionOccured = prevCollisionTuple.Item1;
+
+                if (collisionOccured && !prevCollisionOccured)
                 {
-                    Console.WriteLine("Collision with object");
+                    Console.WriteLine("New collision with object");
                     Console.WriteLine(obj);
                     
                 }
             }
-           
+
+            prevPosition = Position;
             Position += velocity;
             if (solidCollisionOccured)
             {
