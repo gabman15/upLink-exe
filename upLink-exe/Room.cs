@@ -100,6 +100,17 @@ namespace upLink_exe
                         GameObjectIntersectList.Add(false);
                         break;
                     }
+                case "createsaw":
+                    {
+                        Vector2 position = new Vector2(int.Parse(parts[2]), int.Parse(parts[3]));
+                        Vector2 post1 = new Vector2(int.Parse(parts[4]), int.Parse(parts[5]));
+                        Vector2 post2 = new Vector2(int.Parse(parts[6]), int.Parse(parts[7]));
+                        SawBlade saw = new SawBlade(this, position, post1, post2);
+                        saw.Layer = int.Parse(parts[8]);
+                        GameObjectList.Add(saw);
+                        GameObjectIntersectList.Add(false);
+                        break;
+                    }
                 case "createtile":
                     {
                         Type type = GameTile.GetObjectFromName(parts[1]);
@@ -214,11 +225,6 @@ namespace upLink_exe
             {
                 ProcessCommand(lines[i]);
             }
-
-            SawBlade saw = new SawBlade(this, new Vector2(200, 0));
-            saw.Layer = 100;
-            GameObjectList.Add(saw);
-            GameObjectIntersectList.Add(false);
 
             //DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
             //dialogue.Layer = 100;

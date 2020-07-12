@@ -16,17 +16,15 @@ namespace upLink_exe
         private Texture2D[] sprites;
         private Texture2D[] postSprites;
         public SpriteData postSprite { get; set; }
-        private Texture2D _sawpost;
         private Vector2 _post1;
         private Vector2 _post2;
-        private bool _horizontal;
-        private bool _forwards;
         private bool oneToTwo = true;
 
 
-        public SawBlade(Room room, Vector2 pos) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
+        public SawBlade(Room room, Vector2 pos, Vector2 post1, Vector2 post2) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
 
+            // Load saw blade texture
             AssetManager.RequestTexture("turtle", (frames) =>
             {
                 sprites = frames;
@@ -36,6 +34,7 @@ namespace upLink_exe
                 Sprite.Offset = new Vector2(0, 0);
             });
 
+            // Load saw post
             AssetManager.RequestTexture("yara", (frames) =>
             {
                 postSprites = frames;
@@ -46,86 +45,48 @@ namespace upLink_exe
             });
 
 
-            _post1 = pos;
-            _post2 = new Vector2(200, 300);//pos;
-            //_sawpost = this.Game.Content.Load<Texture2D>("SawPost");
-
-            _horizontal = false;
-            _forwards = false;
+            _post1 = post1;
+            _post2 = post2;
 
             Hitbox = new Rectangle(0, 0, 100, 100);
         }
 
-        public void setValues(Vector2 post1, Vector2 post2, bool is_horizontal)
-        {
-            _post1 = post1;
-            _post2 = post2;
-            _horizontal = is_horizontal;
-        }
-
         public override void Update()
         {
-            float distance = 1;
+            if (Position == _post1)
+            {
+                oneToTwo = true;
+            } else if (Position == _post2)
+            {
+                oneToTwo = false;
+            }
 
+            Vector2 direction;
             if (oneToTwo)
             {
-                Vector2 direction = Position - _post2;
+                direction = Vector2.Normalize(_post2 - Position);
             }
-            //if (_horizontal) 
-            //{
-            //    if (Position.X == _post1.X || Position.X == (_post2.X - Size.X))
-            //    {
-            //        Reverse_direction();
-            //    }
-            //}
-            //else
-            //{
-            //    if (Position.Y == _post1.Y || Position.Y == (_post2.Y - Size.Y))
-            //    {
-            //        Reverse_direction();
-            //    }
-            //}
+            else
+            {
+                direction = Vector2.Normalize(_post1 - Position);
+            }
 
-            //if (_horizontal && _forwards)
-            //{
-            //    Position = new Vector2(Position.X + distance, Position.Y);
-            //}
-            //else if (_horizontal && !_forwards)
-            //{
-            //    Position = new Vector2(Position.X - distance, Position.Y);
-            //}
-            //else if (!_horizontal && _forwards)
-            //{
-            //    Position = new Vector2(Position.X, Position.Y + distance);
-            //}
-            //else
-            //{
-            //    Position = new Vector2(Position.X, Position.Y - distance);
-            //}
+            Position += direction/2 * 5; // Note: This cannot be arbitrary, as Position must exactly equal _post1/_post2. TODO: fix
 
 
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(_sawpost, _post1, Color.White);
-            //spriteBatch.Draw(_sawpost, _post2, Color.White);
             base.Draw(spriteBatch);
             postSprite?.Draw(spriteBatch, _post1);
             postSprite?.Draw(spriteBatch, _post2);
 
         }
 
-        private void Reverse_direction()
+        public override void Collision(Player player)
         {
-            if (_forwards)
-            {
-                _forwards = false;
-            }
-            else
-            {
-                _forwards = true;
-            }
+            Console.WriteLine("Death!!!");
         }
 
     }
