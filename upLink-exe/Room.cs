@@ -249,14 +249,20 @@ namespace upLink_exe
             {
                 ProcessCommand(lines[i]);
             }
-            DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
-            dialogue.Layer = 100;
-            GameObjectList.Add(dialogue);
+
+            SawBlade saw = new SawBlade(this, new Vector2(200, 0));
+            saw.Layer = 100;
+            GameObjectList.Add(saw);
             GameObjectIntersectList.Add(false);
-            Console.WriteLine(dialogue);
-            Console.WriteLine(dialogue.Size);
-            Console.WriteLine(dialogue.Hitbox);
-            Console.WriteLine(dialogue.Position);
+
+            //DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
+            //dialogue.Layer = 100;
+            //GameObjectList.Add(dialogue);
+            //GameObjectIntersectList.Add(false);
+            //Console.WriteLine(dialogue);
+            //Console.WriteLine(dialogue.Size);
+            //Console.WriteLine(dialogue.Hitbox);
+            //Console.WriteLine(dialogue.Position);
 
         }
         public static int HorizRectDistance(Rectangle a, Rectangle b) //not too sure where to put these
