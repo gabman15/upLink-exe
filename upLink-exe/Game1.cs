@@ -68,6 +68,7 @@ namespace upLink_exe
             AssetManager.LoadTexture("turtle", "sprites\\turtle", 1);
             AssetManager.LoadTexture("yara", "sprites\\yaraSprite", 22);
             AssetManager.LoadTexture("labFloor", "sprites\\labFloorTile",1);
+            AssetManager.LoadTexture("labBench", "sprites\\labBench", 1);
         }
 
         /// <summary>

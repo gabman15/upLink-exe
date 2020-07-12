@@ -52,6 +52,8 @@ namespace upLink_exe.GameTiles
             {
                 case "labFloor":
                     return typeof(LabFloorTile);
+                case "labBench":
+                    return typeof(LabBenchTile);
             }
             return null;
         }
