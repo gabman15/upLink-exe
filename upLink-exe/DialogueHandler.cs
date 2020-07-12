@@ -58,11 +58,20 @@ namespace upLink_exe
             };
             
             _dialogues = dialogues;
+
+            _dialogues[0].Set_at_bottom();
+
+            index = -1;
+            things_to_update = new List<int>();
+            is_running = false;
+            released = true;
+
         }
 
         public override void Collision(Player player)
         {
             Console.WriteLine("Begin dialogue");
+            is_running = true;
         }
 
         public void Next()
@@ -101,12 +110,13 @@ namespace upLink_exe
 
         public override void Update()
         {
+            Console.WriteLine("running???? " + is_running);
 
             if (is_running)
             {
                 var kstate = Keyboard.GetState();
 
-                if (kstate.IsKeyDown(Keys.F))
+                if (kstate.IsKeyDown(Keys.Space))
                 {
                     if (released)
                     {
