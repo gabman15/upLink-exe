@@ -94,6 +94,8 @@ namespace upLink_exe.GameObjects
             //Drag Wires
 
 
+
+
             if (draggingWire != "" && !placedWire && (Math.Abs(Position.X - draggingFrom.Position.X) >= 100 || Math.Abs(Position.Y - draggingFrom.Position.Y) >= 100))
             {
                 draggingFrom.Solid = true;
@@ -135,6 +137,7 @@ namespace upLink_exe.GameObjects
 
                 if (solidCollisionOccured && !prevCollisionOccured)
                 {
+
                     
                     Console.WriteLine("New collision with object");
                     Console.WriteLine(obj);
@@ -143,6 +146,8 @@ namespace upLink_exe.GameObjects
                 }
                 else if (collisionOccured && !prevCollisionOccured && movementStage == 0)
                 {
+
+
                     obj.Collision(this);
                     currRoom.GameObjectIntersectList[i] = collisionOccured;
                 }

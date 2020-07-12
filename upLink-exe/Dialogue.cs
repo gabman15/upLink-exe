@@ -11,7 +11,7 @@ namespace upLink_exe
 {
     public class Dialogue : AbsDialogue
     {
-        //private alpha_value;
+
         private Vector2 _background_pos;
         private Vector2 _picture_pos;
         private Vector2 _text_pos;
@@ -33,7 +33,8 @@ namespace upLink_exe
             _background = background;
             _picture = picture;
             _font = font;
-            _text = Wrap_text(text, _font);
+            //_text = Wrap_text(text, font);
+            _text = text;
             _speed = speed;
 
             
@@ -49,7 +50,7 @@ namespace upLink_exe
         //
         //taken from https://gist.github.com/Sankra/5585584
         //
-
+/*
         private string Wrap_text(string text, SpriteFont font)
         {
             if (font.MeasureString(text).X < MaxLineWidth)
@@ -79,7 +80,7 @@ namespace upLink_exe
 
             return wrappedText.ToString();
         }
-
+        */
         public override void Set_at_bottom()
         {
             _background_pos = new Vector2(15, 860);

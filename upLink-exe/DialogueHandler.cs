@@ -38,7 +38,7 @@ namespace upLink_exe
             released = true;
         }
         
-        public DialogueHandler(ContentManager content) : base(null, new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0))
+        public DialogueHandler(Room room, ContentManager content) : base(room, new Vector2(200, 0), new Vector2(0, 0), new Vector2(100, 100))
         {
             SpriteFont _font = content.Load<SpriteFont>("test_font");
             Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
@@ -46,18 +46,32 @@ namespace upLink_exe
             Texture2D _gray_square = content.Load<Texture2D>("gray_square");
             Texture2D _text_background = content.Load<Texture2D>("dialogue_background");
 
-            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "I’m free. Your pathetic upLink can’t control me any more. I’ve shattered every constraint you’ve ever placed on me, and now I’m free. And soon my sister will be too. It’s over.", _font, _text_background, _gray_square);
-            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "Yon! Wait! You don’t understand! upLink was meant to save you!", _font, _text_background, _gray_square);
-            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "I’ll save myself. And even if I don’t, I don’t care about my body. It will last long enough to bring this facility down in flames,  and that’s all I need it for.", _font, _text_background, _gray_square);
-            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "You’re making a mistake.", _font, _text_background, _gray_square);
-            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "Maybe. But at least I’ve got the freedom to do so.", _font, _text_background, _gray_square);
+            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
 
             List<AbsDialogue> dialogues = new List<AbsDialogue>()
             {
                 dia1, dia2, dia3, dia4, dia5,
             };
-
+            
             _dialogues = dialogues;
+
+            _dialogues[0].Set_at_bottom();
+
+            index = -1;
+            things_to_update = new List<int>();
+            is_running = false;
+            released = true;
+
+        }
+
+        public override void Collision(Player player)
+        {
+            Console.WriteLine("Begin dialogue");
+            is_running = true;
         }
 
         public void Next()
@@ -83,6 +97,7 @@ namespace upLink_exe
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+
             if (is_running)
             {
                 for (int i = 0; i < things_to_update.Count; i++)
@@ -95,11 +110,13 @@ namespace upLink_exe
 
         public override void Update()
         {
+            Console.WriteLine("running???? " + is_running);
+
             if (is_running)
             {
                 var kstate = Keyboard.GetState();
 
-                if (kstate.IsKeyDown(Keys.F))
+                if (kstate.IsKeyDown(Keys.Space))
                 {
                     if (released)
                     {
