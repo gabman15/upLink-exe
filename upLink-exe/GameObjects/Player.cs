@@ -11,7 +11,6 @@ namespace upLink_exe.GameObjects
 {
     public class Player : GameObject
     {
-
         private Vector2 spawnLoc;
         private Texture2D[] idleSprite;
         private KeyboardState keyState, oldKeyState = Keyboard.GetState();
@@ -24,7 +23,6 @@ namespace upLink_exe.GameObjects
 
             AssetManager.RequestTexture("turtle", (frames) =>
             {
-                //Console.WriteLine(frames.Length);
                 idleSprite = frames;
                 Sprite = new SpriteData(idleSprite);
                 Sprite.Size = new Vector2(100, 100);
@@ -38,10 +36,8 @@ namespace upLink_exe.GameObjects
 
         public override void Update()
         {
-            Console.WriteLine("pos: " + Position);
             Vector2 velocity = Velocity;
             keyState = Keyboard.GetState();
-            bool collisionOccured = false;
 
             if (movementStage > 0)
                 movementStage -= 1;
@@ -74,89 +70,126 @@ namespace upLink_exe.GameObjects
                     movementStage = 10;
                 }
             }
-
+            
             // Deal with collisions
+            bool collisionOccured = false;
+            bool solidCollisionOccured = false;
             for (int i = 0; i < currRoom.GameObjectList.Count; i++)
             {
                 Vector2 initialVelocity = velocity;
 
                 GameObject obj = currRoom.GameObjectList[i];
-                if (obj.Solid)
-                {
-                    Rectangle targetRect = AddVectorToRect(obj.Hitbox, obj.Position, VectorCeil(obj.Velocity));
-                    Rectangle fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(0, velocity.Y)));
-                    while (RectangleInRectangle(fromRect, targetRect))
-                    {
-                        if (Math.Abs(velocity.Y) < CollisionPrecision)
-                        {
-                            velocity.Y = 0;
-                            break;
-                        }
-                        else
-                        {
-                            velocity.Y -= Math.Sign(velocity.Y) * CollisionPrecision;
-                            fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(0, velocity.Y)));
-                        }
-                    }
-                    fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(velocity.X, 0)));
-                    while (RectangleInRectangle(fromRect, targetRect))
-                    {
-                        if (Math.Abs(velocity.X) < CollisionPrecision)
-                        {
-                            Console.WriteLine("Collision with object (x)");
-                            velocity.X = 0;
-                            break;
-                        }
-                        else
-                        {
-                            velocity.X -= Math.Sign(velocity.X) * CollisionPrecision;
-                            fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(new Vector2(velocity.X, 0)));
-                        }
-                    }
-                    fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(velocity));
-                    while (RectangleInRectangle(fromRect, targetRect))
-                    {
-                        if (Math.Abs(velocity.X) < CollisionPrecision)
-                        {
-                            Console.WriteLine("Collision with object (x, y/x)");
-                            velocity.X = 0;
-                            break;
-                        }
-                        else
-                        {
-                            velocity.X -= Math.Sign(velocity.X) * CollisionPrecision;
-                        }
-                        if (Math.Abs(velocity.Y) < CollisionPrecision)
-                        {
-                            Console.WriteLine("Collision with object (y, y/x)");
-                            velocity.Y = 0;
-                            break;
-                        }
-                        else
-                        {
-                            velocity.Y -= Math.Sign(velocity.Y) * CollisionPrecision;
-                        }
-                        fromRect = AddVectorToRect(Hitbox, Position, VectorCeil(velocity));
-                    }
-                }
+                if (obj == this)
+                    continue;
 
-                if (initialVelocity != velocity)
+                Tuple<bool, bool, Vector2> collisionTuple = checkCollision(Position, Hitbox, velocity, obj);
+                collisionOccured = collisionTuple.Item1;
+                solidCollisionOccured = collisionTuple.Item2;
+                velocity = collisionTuple.Item3;
+
+                if (collisionOccured)
                 {
                     Console.WriteLine("Collision with object");
                     Console.WriteLine(obj);
-                    collisionOccured = true;
+                    
                 }
             }
            
             Position += velocity;
-            if (collisionOccured)
+            if (solidCollisionOccured)
             {
                 velocity.Y = 0;
                 velocity.X = 0;
             }
+
             Velocity = velocity;
             oldKeyState = keyState;
             base.Update();
+        }
+
+        // Return: isCollision, isSolidCollision, new velocity vector
+        private static Tuple<bool, bool, Vector2> checkCollision(Vector2 position, Rectangle hitbox, Vector2 velocity, GameObject obj)
+        {
+            Vector2 initialVelocity = velocity;
+            bool isCollision = false;
+            bool isSolidCollision = false;
+            if (obj.Solid)
+            {
+                Rectangle targetRect = AddVectorToRect(obj.Hitbox, obj.Position, VectorCeil(obj.Velocity));
+                Rectangle fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(0, velocity.Y)));
+                while (RectangleInRectangle(fromRect, targetRect))
+                {
+                    if (Math.Abs(velocity.Y) < CollisionPrecision)
+                    {
+                        velocity.Y = 0;
+                        break;
+                    }
+                    else
+                    {
+                        velocity.Y -= Math.Sign(velocity.Y) * CollisionPrecision;
+                        fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(0, velocity.Y)));
+                    }
+                }
+                fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(velocity.X, 0)));
+                while (RectangleInRectangle(fromRect, targetRect))
+                {
+                    if (Math.Abs(velocity.X) < CollisionPrecision)
+                    {
+                        velocity.X = 0;
+                        break;
+                    }
+                    else
+                    {
+                        velocity.X -= Math.Sign(velocity.X) * CollisionPrecision;
+                        fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(velocity.X, 0)));
+                    }
+                }
+                fromRect = AddVectorToRect(hitbox, position, VectorCeil(velocity));
+                while (RectangleInRectangle(fromRect, targetRect))
+                {
+                    if (Math.Abs(velocity.X) < CollisionPrecision)
+                    {
+                        velocity.X = 0;
+                        break;
+                    }
+                    else
+                    {
+                        velocity.X -= Math.Sign(velocity.X) * CollisionPrecision;
+                    }
+                    if (Math.Abs(velocity.Y) < CollisionPrecision)
+                    {
+                        velocity.Y = 0;
+                        break;
+                    }
+                    else
+                    {
+                        velocity.Y -= Math.Sign(velocity.Y) * CollisionPrecision;
+                    }
+                    fromRect = AddVectorToRect(hitbox, position, VectorCeil(velocity));
+                }
+                if (initialVelocity != velocity)
+                {
+                    isCollision = true;
+                    isSolidCollision = true;
+                }
+            }
+            else
+            {
+                Rectangle targetRect = AddVectorToRect(obj.Hitbox, obj.Position, VectorCeil(obj.Velocity));
+
+                Rectangle fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(0, velocity.Y)));
+                if (RectangleInRectangle(fromRect, targetRect))
+                    isCollision = true;
+
+                fromRect = AddVectorToRect(hitbox, position, VectorCeil(new Vector2(velocity.X, 0)));
+                if (RectangleInRectangle(fromRect, targetRect))
+                    isCollision = true;
+
+                fromRect = AddVectorToRect(hitbox, position, VectorCeil(velocity));
+                if (RectangleInRectangle(fromRect, targetRect))
+                    isCollision = true;
+            }
+            return new Tuple<bool, bool, Vector2>(isCollision, isSolidCollision, velocity);
         }
     }
 }
