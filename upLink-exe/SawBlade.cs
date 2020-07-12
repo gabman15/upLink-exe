@@ -10,7 +10,6 @@ namespace upLink_exe
 {
     public class SawBlade : GameObject
     {
-
         private Texture2D[] sprites;
         private Texture2D _sawpost;
         private Vector2 _post1;
