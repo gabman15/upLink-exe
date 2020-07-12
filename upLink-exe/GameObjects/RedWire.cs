@@ -19,5 +19,16 @@ namespace upLink_exe.GameObjects
                 Sprite.Layer = Layer;
             });
         }
+
+        public override void Collision(Player player)
+        {
+            Console.WriteLine(Position + ":" + player.justPlacedWire?.Position);
+            if (player.draggingWire != "" && Position != player.justPlacedWire.Position)
+            {
+                Console.WriteLine("collide");
+                player.draggingWire = "";
+                player.draggingFrom = null;
+            }
+        }
     }
 }

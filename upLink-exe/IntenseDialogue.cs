@@ -128,14 +128,14 @@ namespace upLink_exe
             {   
                 spriteBatch.Draw(_person1, _location1, Color.White * _fade);
                 spriteBatch.Draw(_background, _background_location, Color.White * _fade);
-                spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
+                //spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
+                //spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
             }
             else
             {
 
-                Color color1 = Color.DarkGray;
-                Color color2 = Color.DarkGray;
+                Color color1 = Color.Gray;
+                Color color2 = Color.Gray;
                 if (_speaking1)
                     color1 = Color.White;
                 if (_speaking2)
@@ -145,14 +145,14 @@ namespace upLink_exe
                 spriteBatch.Draw(_person2, _location2, color2 * _fade);
                 spriteBatch.Draw(_background, _background_location, Color.White * _fade);
 
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
+                //spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
                 if (_speaking1)
                 {
-                    spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
+                    //spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
                 }
                 else
                 {
-                    spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade);
+                    //spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade);
                 }
             }
         }

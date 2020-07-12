@@ -46,19 +46,26 @@ namespace upLink_exe
             Texture2D _gray_square = content.Load<Texture2D>("gray_square");
             Texture2D _text_background = content.Load<Texture2D>("dialogue_background");
 
-            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "asdf", _font, _text_background, _gray_square);
-            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "df", _font, _text_background, _gray_square);
-            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "gdsa", _font, _text_background, _gray_square);
-            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "asdgasdg", _font, _text_background, _gray_square);
-            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "as sdfa sdfa", _font, _text_background, _gray_square);
+            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "", _font, _text_background, _gray_square);
+            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "", _font, _text_background, _gray_square);
 
             List<AbsDialogue> dialogues = new List<AbsDialogue>()
             {
                 dia1, dia2, dia3, dia4, dia5,
             };
             
-
             _dialogues = dialogues;
+
+            _dialogues[0].Set_at_bottom();
+
+            index = -1;
+            things_to_update = new List<int>();
+            is_running = false;
+            released = true;
+
         }
 
         public override void Collision(Player player)
@@ -103,12 +110,13 @@ namespace upLink_exe
 
         public override void Update()
         {
+            Console.WriteLine("running???? " + is_running);
 
             if (is_running)
             {
                 var kstate = Keyboard.GetState();
 
-                if (kstate.IsKeyDown(Keys.F))
+                if (kstate.IsKeyDown(Keys.Space))
                 {
                     if (released)
                     {

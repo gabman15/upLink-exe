@@ -40,5 +40,11 @@ namespace upLink_exe.GameObjects
                 }
             }
         }
+
+        public void UpdateWithPlayerPos(Player player)
+        {
+            if ((Math.Abs(Position.X - player.Position.X) >= 100 || Math.Abs(Position.Y - player.Position.Y) >= 100) && completed)
+                Solid = true;
+        }
     }
 }

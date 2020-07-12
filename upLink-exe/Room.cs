@@ -49,6 +49,7 @@ namespace upLink_exe
             for (int i = 0; i < GameObjectList.Count; i++)
             {
                 GameObject obj = GameObjectList[i];
+                //Console.WriteLine(obj + " pos:" + obj.Position);
                 obj.Update();
             }
             //Sounds.Update();
