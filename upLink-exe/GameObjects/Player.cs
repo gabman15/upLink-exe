@@ -76,6 +76,8 @@ namespace upLink_exe.GameObjects
             }
 
             // Deal with collisions
+
+
             for (int i = 0; i < currRoom.GameObjectList.Count; i++)
             {
                 Vector2 initialVelocity = velocity;

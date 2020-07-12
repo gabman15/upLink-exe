@@ -102,5 +102,10 @@ namespace upLink_exe.GameObjects
             }
             return null;
         }
+
+        public virtual void Collision(Player player)
+        {
+
+        }
     }
 }

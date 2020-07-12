@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace upLink_exe.GameTiles
+namespace upLink_exe.GameObjects
 {
-    class GreenWire : GameTile
+    class OrangeWire : GameObject
     {
-        public GreenWire(Room room, Vector2 pos) : base(room, pos, new Vector2(100,100))
+        public OrangeWire(Room room, Vector2 pos) : base(room, pos, new Vector2(0,0), new Vector2(100,100))
         {
-            AssetManager.RequestTexture("greenWire", (frames) =>
+            AssetManager.RequestTexture("orangeWire", (frames) =>
             {
                 Sprite = new SpriteData(frames);
                 Sprite.Size = new Vector2(100, 100);
