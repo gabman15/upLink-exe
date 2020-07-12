@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using testing.GameObjects;
+using upLink_exe.GameObjects;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace upLink_exe
 {
-    public class DialogueHandler : Component
+    public class DialogueHandler : GameObject
     {
         private List<AbsDialogue> _dialogues;
         private List<int> things_to_update;
@@ -33,7 +35,7 @@ namespace upLink_exe
         
         public DialogueHandler(ContentManager content)
         {
-            Spritefont _font = content.Load<SpriteFont>("test_font");
+            SpriteFont _font = content.Load<SpriteFont>("test_font");
             Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
             Texture2D image2 = content.Load<Texture2D>("400x300_Yara");
             Texture2D _gray_square = content.Load<Texture2D>("gray_square");
