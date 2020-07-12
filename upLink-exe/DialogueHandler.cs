@@ -38,7 +38,7 @@ namespace upLink_exe
             released = true;
         }
         
-        public DialogueHandler(ContentManager content) : base(null, new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0))
+        public DialogueHandler(Room room, ContentManager content) : base(room, new Vector2(200, 0), new Vector2(0, 0), new Vector2(100, 100))
         {
             SpriteFont _font = content.Load<SpriteFont>("test_font");
             Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
@@ -59,6 +59,11 @@ namespace upLink_exe
             
 
             _dialogues = dialogues;
+        }
+
+        public override void Collision(Player player)
+        {
+            Console.WriteLine("Begin dialogue");
         }
 
         public void Next()
