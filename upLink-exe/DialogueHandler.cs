@@ -110,7 +110,7 @@ namespace upLink_exe
 
         public override void Update()
         {
-            Console.WriteLine("running???? " + is_running);
+            //Console.WriteLine("running???? " + is_running);
 
             if (is_running)
             {

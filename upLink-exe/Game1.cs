@@ -17,6 +17,8 @@ namespace upLink_exe
         private int shake_timer;
         private int shake_amount;
 
+        private KeyboardState oldKeyState;
+
         Room currentRoom;
         public int currentLevel;
         public int lives;
@@ -42,6 +44,8 @@ namespace upLink_exe
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
+
+            oldKeyState = Keyboard.GetState();
 
             rand = rand = new Random();
 
@@ -84,6 +88,8 @@ namespace upLink_exe
             AssetManager.LoadTexture("saw", "sprites\\saw", 3);
             AssetManager.LoadTexture("door", "sprites\\door", 1);
             AssetManager.LoadTexture("post", "sprites\\post", 1);
+            AssetManager.LoadTexture("yon", "sprites\\yon", 1);
+            AssetManager.LoadTexture("win", "sprites\\win", 1);
 
             AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
             AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
@@ -107,8 +113,8 @@ namespace upLink_exe
             currentRoom?.Destroy();
             currentRoom = new Room(this);
             
-            currentRoom.Load("test.txt");
-            //currentRoom.Load("level" + levelnum + ".txt");
+            //currentRoom.Load("level5.txt");
+            currentRoom.Load("level" + levelnum + ".txt");
         }
 
         public void NextLevel()
@@ -128,7 +134,6 @@ namespace upLink_exe
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             var kstate = Keyboard.GetState();
 
             //THIS IS A TEST FOR SCREEN SHAKE
@@ -142,6 +147,10 @@ namespace upLink_exe
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 RestartLevel();
+            if (!kstate.IsKeyDown(Keys.N) && oldKeyState.IsKeyDown(Keys.N))
+                NextLevel();
+
+            oldKeyState = Keyboard.GetState();
             currentRoom.Update();
 
             base.Update(gameTime);

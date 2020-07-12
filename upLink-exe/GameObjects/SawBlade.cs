@@ -75,9 +75,10 @@ namespace upLink_exe
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            
             postSprite?.Draw(spriteBatch, _post1);
             postSprite?.Draw(spriteBatch, _post2);
+            base.Draw(spriteBatch);
         }
 
         public override void Collision(Player player)
