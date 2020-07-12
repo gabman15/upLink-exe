@@ -87,6 +87,7 @@ namespace upLink_exe
         public override void Collision(Player player)
         {
             Console.WriteLine("Death!!!");
+            currRoom.Game.RestartLevel();
         }
 
     }

@@ -46,40 +46,40 @@ namespace upLink_exe
             GameObjectIntersectList = new List<bool>();
             GameTileList = new List<GameTile>();
 
-            AssetManager.RequestSound("forestTheme", (sound) =>
-            {
-                forestTheme = sound;
+            //AssetManager.RequestSound("forestTheme", (sound) =>
+            //{
+            //    forestTheme = sound;
 
-            });
-            AssetManager.RequestSound("escapeTheme", (sound) =>
-            {
-                escapeTheme = sound;
-            });
-            AssetManager.RequestSound("overtureTheme", (sound) =>
-            {
-                overtureTheme = sound;
-            });
-            AssetManager.RequestSound("gameAfootTheme", (sound) =>
-            {
-                gameAfootTheme = sound;
-            });
+            //});
+            //AssetManager.RequestSound("escapeTheme", (sound) =>
+            //{
+            //    escapeTheme = sound;
+            //});
+            //AssetManager.RequestSound("overtureTheme", (sound) =>
+            //{
+            //    overtureTheme = sound;
+            //});
+            //AssetManager.RequestSound("gameAfootTheme", (sound) =>
+            //{
+            //    gameAfootTheme = sound;
+            //});
 
             Width = 512;
             Height = 512;
         }
         public void Update()
         {
-            if (Sounds.CurrentMusic == null)
-            {
-                if(Game.currentLevel == 1 || Game.currentLevel == 2)
-                    Sounds.PlayMusic(overtureTheme);
-                if (Game.currentLevel == 3 || Game.currentLevel == 4)
-                    Sounds.PlayMusic(gameAfootTheme);
-                if (Game.currentLevel == 5 || Game.currentLevel == 6)
-                    Sounds.PlayMusic(escapeTheme);
-                if (Game.currentLevel == 7 || Game.currentLevel == 8)
-                    Sounds.PlayMusic(forestTheme);
-            }
+            //if (Sounds.CurrentMusic == null)
+            //{
+            //    if(Game.currentLevel == 1 || Game.currentLevel == 2)
+            //        Sounds.PlayMusic(overtureTheme);
+            //    if (Game.currentLevel == 3 || Game.currentLevel == 4)
+            //        Sounds.PlayMusic(gameAfootTheme);
+            //    if (Game.currentLevel == 5 || Game.currentLevel == 6)
+            //        Sounds.PlayMusic(escapeTheme);
+            //    if (Game.currentLevel == 7 || Game.currentLevel == 8)
+            //        Sounds.PlayMusic(forestTheme);
+            //}
 
             for (int i = 0; i < GameObjectList.Count; i++)
             {

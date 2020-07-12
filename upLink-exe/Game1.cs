@@ -79,10 +79,10 @@ namespace upLink_exe
             AssetManager.LoadTexture("orangeTerminal", "sprites\\orangeTerminal", 1);
             AssetManager.LoadTexture("wall", "sprites\\wall", 1);
 
-            AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
-            AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
-            AssetManager.LoadSound("gameAfootTheme", "sounds\\GameIsAfoot");
-            AssetManager.LoadSound("escapeTheme", "sounds\\Escape");
+            //AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
+            //AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
+            //AssetManager.LoadSound("gameAfootTheme", "sounds\\GameIsAfoot");
+            //AssetManager.LoadSound("escapeTheme", "sounds\\Escape");
         }
 
         /// <summary>
