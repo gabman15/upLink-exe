@@ -21,5 +21,10 @@ namespace upLink_exe.GameObjects
                 Sprite.Offset = new Vector2(0, 0);
             });
         }
+
+        public override void Collision(Player player)
+        {
+            player.draggingWire = "red";
+        }
     }
 }

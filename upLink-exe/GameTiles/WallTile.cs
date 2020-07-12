@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework;
 
 namespace upLink_exe.GameTiles
 {
-    class GreenWire : GameTile
+    class WallTile : GameTile
     {
-        public GreenWire(Room room, Vector2 pos) : base(room, pos, new Vector2(100,100))
+        public WallTile(Room room, Vector2 pos) : base(room, pos, new Vector2(100, 100))
         {
-            AssetManager.RequestTexture("greenWire", (frames) =>
+            AssetManager.RequestTexture("wall", (frames) =>
             {
                 Sprite = new SpriteData(frames);
                 Sprite.Size = new Vector2(100, 100);

@@ -95,12 +95,25 @@ namespace upLink_exe.GameObjects
                     return typeof(GreenTerminal);
                 case "orangeTerminal":
                     return typeof(OrangeTerminal);
+                case "redWire":
+                    return typeof(RedWire);
+                case "blueWire":
+                    return typeof(BlueWire);
+                case "greenWire":
+                    return typeof(GreenWire);
+                case "orangeWire":
+                    return typeof(OrangeWire);
                 case "block":
                     return typeof(BlockObject);
                 case "":
                     return typeof(GameObject);
             }
             return null;
+        }
+
+        public virtual void Collision(Player player)
+        {
+
         }
     }
 }
