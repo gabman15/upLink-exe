@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using upLink_exe.GameObjects;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using System.IO;
 
 namespace upLink_exe
 {
@@ -37,27 +38,20 @@ namespace upLink_exe
             is_running = false;
             released = true;
         }
-        
-        public DialogueHandler(Room room, ContentManager content) : base(room, new Vector2(200, 0), new Vector2(0, 0), new Vector2(100, 100))
+
+        public DialogueHandler(Room room, Vector2 pos, string filename, ContentManager content) : base(room, pos, new Vector2(0, 0), new Vector2(100, 100))
         {
             SpriteFont _font = content.Load<SpriteFont>("newFont");
-            Texture2D image1 = content.Load<Texture2D>("400x300_Yon");
-            Texture2D image2 = content.Load<Texture2D>("400x300_Yara");
             Texture2D _gray_square = content.Load<Texture2D>("gray_square");
             Texture2D _text_background = content.Load<Texture2D>("dialogue_background");
 
-            IntenseDialogue dia1 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 1", _font, _text_background, _gray_square);
-            IntenseDialogue dia2 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "dialogue 2", _font, _text_background, _gray_square);
-            IntenseDialogue dia3 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 3", _font, _text_background, _gray_square);
-            IntenseDialogue dia4 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", true, false, "dialogue 4", _font, _text_background, _gray_square);
-            IntenseDialogue dia5 = new IntenseDialogue(image1, image2, "Chief Experimenter", "Yon", false, true, "dialogue 5", _font, _text_background, _gray_square);
-
-            List<AbsDialogue> dialogues = new List<AbsDialogue>()
+            _dialogues = new List<AbsDialogue>();
+            string[] lines = File.ReadAllLines(filename, Encoding.UTF8);
+            for (int i = 0; i < lines.Length; i++)
             {
-                dia1, dia2, dia3, dia4, dia5,
-            };
-            
-            _dialogues = dialogues;
+                IntenseDialogue dialogue = new IntenseDialogue(lines[i], _font, _gray_square, _text_background, content);
+                _dialogues.Add(dialogue);
+            }
 
             _dialogues[0].Set_at_bottom();
 
@@ -65,7 +59,6 @@ namespace upLink_exe
             things_to_update = new List<int>();
             is_running = false;
             released = true;
-
         }
 
         public override void Collision(Player player)

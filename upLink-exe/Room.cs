@@ -169,6 +169,16 @@ namespace upLink_exe
                         });
                         break;
                     }
+                case "dialogue":
+                    {
+                        string filename = parts[1];
+                        Vector2 position = new Vector2(int.Parse(parts[2]), int.Parse(parts[3]));
+                        DialogueHandler dialogue = new DialogueHandler(this, position, filename, Game.Content);
+                        dialogue.Layer = 0;
+                        GameObjectList.Add(dialogue);
+                        GameObjectIntersectList.Add(false);
+                        break;
+                    }
             }
         }
 
@@ -293,16 +303,6 @@ namespace upLink_exe
             {
                 ProcessCommand(lines[i]);
             }
-
-
-            DialogueHandler dialogue = new DialogueHandler(this, Game.Content);
-            dialogue.Layer = 100;
-            GameObjectList.Add(dialogue);
-            GameObjectIntersectList.Add(false);
-            //Console.WriteLine(dialogue);
-            //Console.WriteLine(dialogue.Size);
-            //Console.WriteLine(dialogue.Hitbox);
-            //Console.WriteLine(dialogue.Position);
 
         }
         public static int HorizRectDistance(Rectangle a, Rectangle b) //not too sure where to put these

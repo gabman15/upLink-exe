@@ -158,6 +158,13 @@
     <None Include="Content\Experimenter_1_TEST.png" />
     <None Include="Content\gray_square.png" />
     <None Include="Content\test_font.spritefont" />
+    <None Include="bin\DesktopGL\AnyCPU\Debug\dialogue1.txt" />
+    <None Include="Content\fem_exp_final.png" />
+    <None Include="Content\paper.png" />
+    <None Include="Content\Yara_Final_with_face.png" />
+    <None Include="Content\male_exp_final.png" />
+    <None Include="Content\yon_post_final.png" />
+    <None Include="Content\yon_pre_final.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Rooms\" />
