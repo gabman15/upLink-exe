@@ -63,6 +63,8 @@ namespace upLink_exe
         }
         public void Draw(SpriteBatch batch, Vector2 position, Color color)
         {
+
+            if (Frames == null) Console.WriteLine("null! BAD VERY BAD");
             if (Frames != null)
             {
                 Rectangle drawRect = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);

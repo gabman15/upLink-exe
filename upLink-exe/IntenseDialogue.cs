@@ -14,15 +14,15 @@ namespace upLink_exe
     {
 
         private int _people;
-        private Texture2D _person1;
-        private Texture2D _person2;
+        private SpriteData _person1;
+        private SpriteData _person2;
         private Vector2 _location1;
         private Vector2 _location2;
         private Vector2 _background_location;
         private string _name1;
         private string _name2;
-        private Texture2D _background;
-        private Texture2D _gray_square;
+        private SpriteData _background;
+        private SpriteData _gray_square;
         private string _text;
         private SpriteFont _font;
         private const float MaxLineWidth = 700;
@@ -33,13 +33,26 @@ namespace upLink_exe
 
         public IntenseDialogue(Texture2D person1, Texture2D person2, string name1, string name2, bool speaking1, bool speaking2, string text, SpriteFont font, Texture2D background, Texture2D gray_square)
         {
+            Texture2D[] person_one = { person1 };
+            Texture2D[] person_two = { person2 };
+            Texture2D[] background_array = { background };
+            Texture2D[] gray_square_array = { gray_square};
+
             _people = 2;
-            _person1 = person1;
-            _person2 = person2;
+            _person1 = new SpriteData(person_one);
+            _person2 = new SpriteData(person_two);
+
+            _person1.Size = new Vector2(300, 400);
+            _person2.Size = new Vector2(300, 400);
+
             _name1 = name1;
             _name2 = name2;
-            _background = background;
-            _gray_square = gray_square;
+            _background = new SpriteData(background_array); 
+            _gray_square = new SpriteData(gray_square_array);
+
+            _background.Size = new Vector2(300, 770);
+            _gray_square.Size = new Vector2(800, 800);
+
             _location1 = new Vector2(50, 90);
             _location2 = new Vector2(450, 90);
             _background_location = new Vector2(15, 490);
@@ -47,19 +60,38 @@ namespace upLink_exe
             _font = font;
             _speaking1 = speaking1;
             _speaking2 = speaking2;
+
+            _person1.Layer = 10f;
+            _person2.Layer = 10f;
+            _background.Layer = 10f;
+            _gray_square.Layer = 9f;
+
         }
 
         public IntenseDialogue(Texture2D person1, string name1, string text, SpriteFont font, Texture2D background, Texture2D gray_square)
         {
+
+            Texture2D[] person_one = { person1 };
+            Texture2D[] background_array = { background };
+            Texture2D[] gray_square_array = { gray_square };
+
             _people = 1;
-            _person1 = person1;
+            _person1 = new SpriteData(person_one);
             _name1 = name1;
-            _background = background;
-            _gray_square = gray_square;
+            _background = new SpriteData(background_array);
+            _gray_square = new SpriteData(gray_square_array);
+
+            _people = 1;
+            _name1 = name1;
             _location1 = new Vector2(250, 90);
             _background_location = new Vector2(15, 490);
             _text = Wrap_text(text, font);
             _font = font;
+
+            _person1.Layer = 10f;
+            _background.Layer = 10f;
+            _gray_square.Layer = 9f;
+
         }
 
         public override void fade_out()
@@ -120,18 +152,20 @@ namespace upLink_exe
                 _fade -= .03f;
             }
 
-            spriteBatch.Draw(_gray_square, new Vector2(0, 0), Color.DarkGray * .6f * _fade);
+            _gray_square.Draw(spriteBatch, new Vector2(0, 0), Color.DarkGray * .6f * _fade);
 
             if (_people == 1)
-            {   
-                spriteBatch.Draw(_person1, _location1, Color.White * _fade);
-                spriteBatch.Draw(_background, _background_location, Color.White * _fade);
-                spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
+            {
+                //Console.WriteLine("people=1");
+                _person1.Draw(spriteBatch, _location1, Color.White * _fade);
+                _background.Draw(spriteBatch, _background_location, Color.White * _fade);
+
+                spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
+                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
             }
             else
             {
-
+                //Console.WriteLine("people=2");
                 Color color1 = Color.Gray;
                 Color color2 = Color.Gray;
                 if (_speaking1)
@@ -139,18 +173,25 @@ namespace upLink_exe
                 if (_speaking2)
                     color2 = Color.White;
 
-                spriteBatch.Draw(_person1, _location1, color1 * _fade);
-                spriteBatch.Draw(_person2, _location2, color2 * _fade);
-                spriteBatch.Draw(_background, _background_location, Color.White * _fade);
+                //Console.WriteLine(_person1.Frames[0]);
+                _person1.Draw(spriteBatch, _location1, Color.White * _fade);
+                _person2.Draw(spriteBatch, _location2, Color.White * _fade);
+                _background.Draw(spriteBatch, _background_location, Color.White * _fade);
 
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade);
+                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
+
                 if (_speaking1)
                 {
-                    spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade);
+                   
+                    spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0,0), 0, SpriteEffects.None, 11f);
+
                 }
                 else
                 {
-                    spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade);
+                    //spriteBatch.DrawString()
+
+                    //spriteBatch.DrawString(_font, _text, new Vector2(30,500), Color.Black);
+                    spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
                 }
             }
         }

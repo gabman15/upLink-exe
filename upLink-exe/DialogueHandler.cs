@@ -102,6 +102,7 @@ namespace upLink_exe
             {
                 for (int i = 0; i < things_to_update.Count; i++)
                 {
+                    //Console.WriteLine("for loop");
                     _dialogues[things_to_update[i]].Draw(spriteBatch);
                 }
             }
@@ -110,7 +111,7 @@ namespace upLink_exe
 
         public override void Update()
         {
-            Console.WriteLine("running???? " + is_running);
+            //Console.WriteLine("running???? " + is_running);
 
             if (is_running)
             {
