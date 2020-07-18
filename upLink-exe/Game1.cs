@@ -17,6 +17,8 @@ namespace upLink_exe
         private int shake_timer;
         private int shake_amount;
 
+        private KeyboardState oldKeyState;
+
         Room currentRoom;
         public int currentLevel;
         public int lives;
@@ -43,6 +45,8 @@ namespace upLink_exe
 
             this.IsMouseVisible = true;
 
+            oldKeyState = Keyboard.GetState();
+
             rand = rand = new Random();
 
             LoadLevel(1);
@@ -66,7 +70,7 @@ namespace upLink_exe
             AssetManager.LoadTexture("monaco", "sprites\\monaco", 1);
             AssetManager.LoadTexture("turtleFlare", "sprites\\turtleFlare", 1);
             AssetManager.LoadTexture("turtle", "sprites\\turtle", 1);
-            AssetManager.LoadTexture("yara", "sprites\\yaraSprite", 22);
+            AssetManager.LoadTexture("yara", "sprites\\yaraSprite", 23);
             AssetManager.LoadTexture("labFloor", "sprites\\labFloorTile",1);
             AssetManager.LoadTexture("labBench", "sprites\\labBench", 1);
             AssetManager.LoadTexture("redWire", "sprites\\redWire", 1);
@@ -78,6 +82,14 @@ namespace upLink_exe
             AssetManager.LoadTexture("greenTerminal", "sprites\\greenTerminal", 1);
             AssetManager.LoadTexture("orangeTerminal", "sprites\\orangeTerminal", 1);
             AssetManager.LoadTexture("wall", "sprites\\wall", 1);
+            AssetManager.LoadTexture("grass", "sprites\\grass", 1);
+            AssetManager.LoadTexture("tree", "sprites\\tree", 1);
+            AssetManager.LoadTexture("rock", "sprites\\rock", 1);
+            AssetManager.LoadTexture("saw", "sprites\\saw", 3);
+            AssetManager.LoadTexture("door", "sprites\\door", 1);
+            AssetManager.LoadTexture("post", "sprites\\post", 1);
+            AssetManager.LoadTexture("yon", "sprites\\yon", 1);
+            AssetManager.LoadTexture("win", "sprites\\win", 1);
 
             AssetManager.LoadSound("forestTheme", "sounds\\TreesForTheForest");
             AssetManager.LoadSound("overtureTheme", "sounds\\Overture");
@@ -101,8 +113,8 @@ namespace upLink_exe
             currentRoom?.Destroy();
             currentRoom = new Room(this);
             
-            currentRoom.Load("test.txt");
-            //currentRoom.Load("level" + levelnum + ".txt");
+            //currentRoom.Load("level5.txt");
+            currentRoom.Load("level" + levelnum + ".txt");
         }
 
         public void NextLevel()
@@ -122,7 +134,6 @@ namespace upLink_exe
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             var kstate = Keyboard.GetState();
 
             //THIS IS A TEST FOR SCREEN SHAKE
@@ -136,6 +147,10 @@ namespace upLink_exe
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 RestartLevel();
+            if (!kstate.IsKeyDown(Keys.N) && oldKeyState.IsKeyDown(Keys.N))
+                NextLevel();
+
+            oldKeyState = Keyboard.GetState();
             currentRoom.Update();
 
             base.Update(gameTime);
