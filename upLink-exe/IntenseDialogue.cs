@@ -61,10 +61,10 @@ namespace upLink_exe
             _speaking1 = speaking1;
             _speaking2 = speaking2;
 
-            _person1.Layer = 10f;
-            _person2.Layer = 10f;
-            _background.Layer = 10f;
-            _gray_square.Layer = 9f;
+            _person1.Layer = 0.10f;
+            _person2.Layer = 0.10f;
+            _background.Layer = 0.10f;
+            _gray_square.Layer = 0.09f;
 
         }
 
@@ -160,8 +160,8 @@ namespace upLink_exe
                 _person1.Draw(spriteBatch, _location1, Color.White * _fade);
                 _background.Draw(spriteBatch, _background_location, Color.White * _fade);
 
-                spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
+                spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.11f);
+                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.11f);
             }
             else
             {
@@ -178,12 +178,12 @@ namespace upLink_exe
                 _person2.Draw(spriteBatch, _location2, Color.White * _fade);
                 _background.Draw(spriteBatch, _background_location, Color.White * _fade);
 
-                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
+                spriteBatch.DrawString(_font, _text, new Vector2(50, 550), Color.Black * _fade, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.11f);
 
                 if (_speaking1)
                 {
                    
-                    spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0,0), 0, SpriteEffects.None, 11f);
+                    spriteBatch.DrawString(_font, _name1, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0,0), 1, SpriteEffects.None, 0.11f);
 
                 }
                 else
@@ -191,7 +191,7 @@ namespace upLink_exe
                     //spriteBatch.DrawString()
 
                     //spriteBatch.DrawString(_font, _text, new Vector2(30,500), Color.Black);
-                    spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 0, SpriteEffects.None, 11f);
+                    spriteBatch.DrawString(_font, _name2, new Vector2(30, 500), Color.Black * _fade, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.11f);
                 }
             }
         }
